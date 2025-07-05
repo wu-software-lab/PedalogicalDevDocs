@@ -1,0 +1,58 @@
+---
+title: "4 · . NET Development Environment"
+format: html
+---
+
+# 4 · . NET Development Environment
+
+We target **.NET 9 LTS** (preview until GA) and use **Entity Framework Core 9** for data access.
+
+## 4.1 Install .NET SDK 9+
+
+| Platform | Command |
+|----------|---------|
+| macOS | `brew install --cask dotnet-sdk` |
+| Windows | `choco install dotnet-9.0-sdk -y` |
+
+Verify:
+
+```bash
+dotnet --version   # 9.x.x
+```
+
+## 4.2 Global EF Core CLI
+
+```bash
+dotnet tool install --global dotnet-ef
+# add to PATH on macOS
+echo 'export PATH="$HOME/.dotnet/tools:$PATH"' >> ~/.zprofile
+```
+
+## 4.3 Visual Studio Code
+
+| macOS | Windows |
+|-------|---------|
+| `brew install --cask visual-studio-code` | `choco install vscode -y` |
+
+From VS Code **Command Palette** run:
+
+```
+Shell Command: Install 'code' command in PATH
+```
+
+### Recommended Extensions
+
+```bash
+code --install-extension ms-dotnettools.csdevkit
+code --install-extension ms-dotnettools.csharp
+code --install-extension jmrog.vscode-nuget-package-manager
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension EditorConfig.EditorConfig
+```
+
+---
+
+::: {.callout-note}
+### Next Step  
+Choose your preferred [**Database Setup**](database.qmd) path.
+:::

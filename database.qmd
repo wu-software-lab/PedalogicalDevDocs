@@ -1,0 +1,105 @@
+---
+title: "5 · Database Setup"
+format: html
+---
+
+# 5 · Database Setup
+
+Pedalogical uses **PostgreSQL 17**. Pick **one** of the two methods below.
+
+---
+
+## Option A — Native Install
+
+### macOS
+
+```bash
+brew install postgresql@17
+brew services start postgresql@17          # auto‑starts at login
+```
+
+Default data directory ➜ `/opt/homebrew/var/postgresql@17`
+
+### Windows
+
+```powershell
+choco install postgresql17 -y
+# Accept installer prompts and set the superuser password
+```
+
+pgAdmin is offered in the EnterpriseDB installer, or install via Chocolatey:
+
+```powershell
+choco install pgadmin4 -y
+```
+
+---
+
+## Option B — Docker (Recommended)
+
+### 1. Install Docker Desktop
+
+| macOS | Windows |
+|-------|---------|
+| `brew install --cask docker` | `choco install docker-desktop -y` |
+
+Launch Docker Desktop once to finish post‑install steps.
+
+### 2. Install pgAdmin (optional GUI)
+
+| macOS | Windows |
+|-------|---------|
+| `brew install --cask pgadmin4` | `choco install pgadmin4 -y` |
+
+### 3. Configure Compose
+
+```bash
+cd ~/GitHub/AiTutor/Docker
+cp docker-compose.example.yml docker-compose.yml
+```
+
+Edit `docker-compose.yml`:
+
+```yaml
+environment:
+  POSTGRES_PASSWORD: "yourStrongPassword"
+```
+
+### 4. Start Services
+
+```bash
+docker-compose up -d
+docker ps           # verify 'pedalogical-db' is healthy
+```
+
+Ports (default):
+
+| Service | Host Port |
+|---------|-----------|
+| Postgres | **5433** |
+| pgAdmin  | 8080 |
+
+---
+
+### Connecting with pgAdmin
+
+1. Open `http://localhost:8080`
+2. Add new server:  
+   *Host *: `host.docker.internal` (mac/Win)  
+   *Port*: `5433`
+
+---
+
+::: {.callout-tip}
+**Which method should I pick?**
+
+*Docker* is disposable, reproducible, and keeps your host clean.  
+*Native* is fine if you prefer `brew services` or need DB access when Docker isn’t running.
+:::
+
+---
+
+::: {.callout-note}
+### Next Step  
+Run [**EF Core Migrations**](migrations.qmd).
+:::

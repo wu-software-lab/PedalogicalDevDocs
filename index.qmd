@@ -1,0 +1,21 @@
+---
+title: "Welcome"
+format: html
+---
+
+# Pedalogical Developer On‑Ramp 🚀
+
+Welcome to the **Pedalogical Developer Docs** — your single source of truth for getting a local development environment up and running in **less than 30 minutes** (coffee not included ☕).
+
+Whether you are:
+
+* **Totally new** to the project and need everything installed,  
+* **Migrating** from our former SQL Server stack, or  
+* **Returning** after a hiatus and just need a refresher,
+
+start at the top‑left **sidebar** and work downward. Every page ends with a *Next Step* link so you can cruise hands‑free.
+
+> **Pro Tip**  
+> Keep a terminal open next to these docs and copy‑paste as you go. Most commands are idempotent — if you run them twice nothing breaks.
+
+If you hit a snag jump to **Troubleshooting** at the bottom of each page or post in the `#dev‑help` Discord channel.

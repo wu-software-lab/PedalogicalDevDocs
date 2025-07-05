@@ -1,0 +1,42 @@
+---
+title: "3 · Environment Variables"
+format: html
+---
+
+# 3 · Environment Variables
+
+The application loads configuration from a **dotenv** file so secrets never reach source control.
+
+## 3.1 Create your `.env`
+
+```bash
+cd ~/GitHub/AiTutor
+cp .env.example .env
+```
+
+## 3.2 Fill Required Keys
+
+| Key | Description | Where to Find |
+|-----|-------------|---------------|
+| `POSTGRES_PASSWORD` | Password for local/Docker Postgres superuser | Choose your own |
+| `OPENAI_API_KEY` | Needed for AI features | Notion → Secrets |
+| `AZURE_STORAGE_KEY` | Media uploads | Notion → Secrets |
+
+Open `.env` in your editor:
+
+```bash
+code .env
+```
+
+Any value left blank will cause the app to fail fast with a descriptive error.
+
+## 3.3 Reloading Changes
+
+Values are read **at application startup**. Restart the dev server after edits.
+
+---
+
+::: {.callout-note}
+### Next Step  
+Install [.NET Tooling](dotnet-tools.qmd).
+:::

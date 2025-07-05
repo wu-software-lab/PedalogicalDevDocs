@@ -1,0 +1,53 @@
+---
+title: "2 · Git & Clone"
+format: html
+---
+
+# 2 · Install Git & Clone the Repository
+
+## 2.1 Install Git
+
+| Platform | Install | Verify |
+|----------|---------|--------|
+| **macOS** | `brew install git` | `git --version` |
+| **Windows** | `choco install git -y` | `git --version` |
+
+> If macOS prompts for Xcode Command‑Line Tools, accept the install — Homebrew relies on them.
+
+## 2.2 Generate an SSH key *(Optional)*
+
+```bash
+ssh-keygen -t ed25519 -C "you@willamette.edu"
+pbcopy < ~/.ssh/id_ed25519.pub   # macOS
+cat ~/.ssh/id_ed25519.pub        # Windows Git Bash
+```
+
+Add the key to your GitHub account (Settings → SSH Keys).
+
+## 2.3 Clone Pedalogical
+
+We keep all project repos in `~/GitHub` for consistency.
+
+```bash
+cd ~
+mkdir -p GitHub && cd GitHub
+git clone git@github.com:wu-software-lab/AiTutor.git   # SSH
+# or
+git clone https://github.com/wu-software-lab/AiTutor.git  # HTTPS
+cd AiTutor
+git status
+```
+
+### Keeping your fork up‑to‑date
+
+```bash
+git remote add upstream https://github.com/wu-software-lab/AiTutor.git
+git pull upstream main
+```
+
+---
+
+::: {.callout-note}
+### Next Step  
+Configure your [**Environment Variables**](env-vars.qmd).
+:::

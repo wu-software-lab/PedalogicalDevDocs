@@ -1,0 +1,67 @@
+---
+title: "6 · Entity Framework Migrations"
+format: html
+---
+
+# 6 · Entity Framework Migrations
+
+Entity Framework Core keeps the Postgres schema in sync with your C# models.
+
+## 6.1 Initial Database Creation
+
+Run once per environment:
+
+```bash
+dotnet ef database update --project src/Pedalogical.Data
+```
+
+## 6.2 Adding a Migration (Model Change)
+
+```bash
+dotnet ef migrations add <Feature>_<DateUTC>   --project src/Pedalogical.Data   --startup-project src/Pedalogical.Api
+dotnet ef database update --project src/Pedalogical.Data
+```
+
+### Naming Convention
+
+```
+<Verb><Entity><WhatChanged>_<yyyymmddHHMM>
+```
+
+Examples:
+
+* `AddStudentEmail_202507052130`
+* `RenameCourseTable_20250710`
+
+## 6.3 Undo the Last Migration
+
+```bash
+dotnet ef migrations remove --project src/Pedalogical.Data
+```
+
+## 6.4 Migrate to a Specific Version
+
+```bash
+dotnet ef database update 202507052130 --project src/Pedalogical.Data
+```
+
+## 6.5 Refreshing the Database (nuke & pave)
+
+```bash
+dropdb pedalogical           # native
+createdb pedalogical
+dotnet ef database update
+```
+
+---
+
+### Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| `Build failed` | Ensure the solution builds before running `dotnet ef`. |
+| `No migrations were applied` | You already ran them — verify with `select * from __EFMigrationsHistory;`. |
+
+---
+
+🎉 *You now have a fully functioning Pedalogical dev environment!*

@@ -1,0 +1,46 @@
+---
+title: "1 · Package Managers"
+format: html
+---
+
+# 1 · Package Managers
+
+We strongly recommend installing all tooling through a package manager — it keeps dependencies **repeatable** and **easy to upgrade**.
+
+## macOS – Homebrew 🍺
+
+Homebrew installs under `/opt/homebrew` (Apple Silicon) or `/usr/local` (Intel).
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile   # Apple Silicon
+brew doctor          # Verify install
+```
+
+### Keeping Brew up‑to‑date
+
+```bash
+brew update          # refresh formulas
+brew upgrade         # upgrade all packages
+```
+
+## Windows – Chocolatey 🍫
+
+Chocolatey installs to `C:\ProgramData\chocolatey`.
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+choco upgrade chocolatey
+```
+
+> **Why not Winget?**  
+> Chocolatey covers everything we need *and* works on Server 2022 machines used in CI.
+
+---
+
+::: {.callout-note}
+### Next Step  
+Head to [**Git & Clone**](git-clone.qmd) to install Git and pull the codebase.
+:::
