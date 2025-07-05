@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Git &amp; Clone – Pedalogical Developer Docs</title>
+<title>First App Run – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -320,15 +320,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
   <ul class="collapse">
-  <li><a href="#install-git" id="toc-install-git" class="nav-link" data-scroll-target="#install-git">1. Install Git</a></li>
-  <li><a href="#generate-an-ssh-key-optional" id="toc-generate-an-ssh-key-optional" class="nav-link" data-scroll-target="#generate-an-ssh-key-optional">2. Generate an SSH key <em>(Optional)</em></a></li>
-  <li><a href="#clone-pedalogical" id="toc-clone-pedalogical" class="nav-link" data-scroll-target="#clone-pedalogical">3. Clone Pedalogical</a>
-  <ul class="collapse">
-  <li><a href="#keeping-your-fork-uptodate" id="toc-keeping-your-fork-uptodate" class="nav-link" data-scroll-target="#keeping-your-fork-uptodate">4. Keeping your fork up‑to‑date</a></li>
-  </ul></li>
+  <li><a href="#initialize-the-database." id="toc-initialize-the-database." class="nav-link" data-scroll-target="#initialize-the-database.">1. Initialize the database.</a></li>
+  <li><a href="#verify-the-database-is-created-and-seeded" id="toc-verify-the-database-is-created-and-seeded" class="nav-link" data-scroll-target="#verify-the-database-is-created-and-seeded">2. Verify the database is created and seeded</a></li>
+  <li><a href="#run-the-application" id="toc-run-the-application" class="nav-link" data-scroll-target="#run-the-application">3. Run the application</a></li>
+  <li><a href="#access-the-app" id="toc-access-the-app" class="nav-link" data-scroll-target="#access-the-app">4. Access the app</a></li>
+  <li><a href="#verify-that-you-can-create-a-new-account" id="toc-verify-that-you-can-create-a-new-account" class="nav-link" data-scroll-target="#verify-that-you-can-create-a-new-account">5. Verify that you can create a new account</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/git-clone.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/first-run.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -340,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Git &amp; Clone</h1>
+<h1 class="title">First App Run</h1>
 </div>
 
 
@@ -359,72 +359,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="tldr" class="level1">
 <h1>TL;DR</h1>
-<p>Install <strong>Git</strong> and clone the <strong>Pedalogical</strong> repository to your local machine.</p>
-<section id="install-git" class="level2">
-<h2 class="anchored" data-anchor-id="install-git">1. Install Git</h2>
+<p>Run the app to create the database and seed initial data.</p>
+<section id="initialize-the-database." class="level2">
+<h2 class="anchored" data-anchor-id="initialize-the-database.">1. Initialize the database.</h2>
+<p>From the root of the repository, run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="verify-the-database-is-created-and-seeded" class="level2">
+<h2 class="anchored" data-anchor-id="verify-the-database-is-created-and-seeded">2. Verify the database is created and seeded</h2>
+<p>You can check the database using your preferred PostgreSQL client (e.g., pgAdmin, BeeHive, or command line). Look for the <code>pedalogical</code> database and verify that the initial tables and data are present.</p>
+<p>To verify via command line, you can run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> postgres <span class="at">-d</span> pedalogical <span class="at">-c</span> <span class="st">"\dt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should see tables like AspNetUsers, AspNetRoles, and others that were seeded during the initial run.</p>
+</section>
+<section id="run-the-application" class="level2">
+<h2 class="anchored" data-anchor-id="run-the-application">3. Run the application</h2>
+<p>Run the application to create the initial data:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="access-the-app" class="level2">
+<h2 class="anchored" data-anchor-id="access-the-app">4. Access the app</h2>
+<p>Open your browser and navigate to <code>http://localhost:5000</code> to access the application.</p>
+</section>
+<section id="verify-that-you-can-create-a-new-account" class="level2">
+<h2 class="anchored" data-anchor-id="verify-that-you-can-create-a-new-account">5. Verify that you can create a new account</h2>
+<ol type="1">
+<li>Click on the “Register” link.</li>
+<li>Fill out the registration form and submit it.</li>
+<li>Check your email for a confirmation link (it might be in your spam folder).</li>
+<li>Log in with the new account.</li>
+</ol>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 58%">
+<col style="width: 41%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Platform</th>
-<th>Install</th>
-<th>Verify</th>
+<th>Issue</th>
+<th>Fix</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>macOS</strong></td>
-<td><code>brew install git</code></td>
-<td><code>git --version</code></td>
+<td>Database connection error</td>
+<td>Ensure your <code>.env</code> file has the correct <code>POSTGRES_PASSWORD</code> and that the database is running.</td>
 </tr>
 <tr class="even">
-<td><strong>Windows</strong></td>
-<td><code>choco install git -y</code></td>
-<td><code>git --version</code></td>
+<td>Application not starting</td>
+<td>Check the console output for errors, ensure all dependencies are installed, and that the database is initialized.</td>
+</tr>
+<tr class="odd">
+<td>Email not sending</td>
+<td>Verify you are connected to the internet and check your spam folder.</td>
 </tr>
 </tbody>
 </table>
-<blockquote class="blockquote">
-<p>If macOS prompts for Xcode Command‑Line Tools, accept the install — Homebrew relies on them.</p>
-</blockquote>
-</section>
-<section id="generate-an-ssh-key-optional" class="level2">
-<h2 class="anchored" data-anchor-id="generate-an-ssh-key-optional">2. Generate an SSH key <em>(Optional)</em></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"you@willamette.edu"</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pbcopy</span> <span class="op">&lt;</span> ~/.ssh/id_ed25519.pub   <span class="co"># macOS</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519.pub        <span class="co"># Windows Git&nbsp;Bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Add the key to your GitHub account (Settings → SSH&nbsp;Keys).</p>
-</section>
-<section id="clone-pedalogical" class="level2">
-<h2 class="anchored" data-anchor-id="clone-pedalogical">3. Clone Pedalogical</h2>
-<p>We keep all project repos in <code>~/GitHub</code> for consistency.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> GitHub <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> GitHub</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:wu-software-lab/AiTutor.git   <span class="co"># SSH</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/wu-software-lab/AiTutor.git  <span class="co"># HTTPS</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> AiTutor</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="keeping-your-fork-uptodate" class="level3">
-<h3 class="anchored" data-anchor-id="keeping-your-fork-uptodate">4. Keeping your fork up‑to‑date</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream https://github.com/wu-software-lab/AiTutor.git</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull upstream main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Next&nbsp;Step
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Configure your <a href="./env-vars.html"><strong>Environment Variables</strong></a>.</p>
-</div>
-</div>
 
 
-</section>
 </section>
 </section>
 
@@ -846,4 +841,4 @@ Next&nbsp;Step
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/git-clone.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/first-run.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

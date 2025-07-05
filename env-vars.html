@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp;·&nbsp;Environment Variables – Pedalogical Developer Docs</title>
+<title>Environment Variables – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -291,32 +291,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="./new-dev-setup.html"> 
+<span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./package-managers.html"> 
-<span class="menu-text">Package&nbsp;Managers</span></a>
+    <a class="nav-link" href="./migrating-to-postgres.qmd"> 
+<span class="menu-text">Migrating to Postgres</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./git-clone.html"> 
-<span class="menu-text">Git&nbsp;&amp;&nbsp;Clone</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./env-vars.html" aria-current="page"> 
-<span class="menu-text">Environment&nbsp;Variables</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./dotnet-tools.html"> 
-<span class="menu-text">.&nbsp;NET&nbsp;Tooling</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./database.html"> 
-<span class="menu-text">Database&nbsp;Setup</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./migrations.html"> 
-<span class="menu-text">EF&nbsp;Migrations</span></a>
+    <a class="nav-link" href="./conventions.qmd"> 
+<span class="menu-text">Conventions</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -334,11 +318,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#environment-variables" id="toc-environment-variables" class="nav-link active" data-scroll-target="#environment-variables">3&nbsp;·&nbsp;Environment Variables</a>
+  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
   <ul class="collapse">
-  <li><a href="#create-your-.env" id="toc-create-your-.env" class="nav-link" data-scroll-target="#create-your-.env">3.1&nbsp;Create your <code>.env</code></a></li>
-  <li><a href="#fill-required-keys" id="toc-fill-required-keys" class="nav-link" data-scroll-target="#fill-required-keys">3.2&nbsp;Fill Required Keys</a></li>
-  <li><a href="#reloading-changes" id="toc-reloading-changes" class="nav-link" data-scroll-target="#reloading-changes">3.3&nbsp;Reloading Changes</a></li>
+  <li><a href="#create-your-.env" id="toc-create-your-.env" class="nav-link" data-scroll-target="#create-your-.env">1. Create your <code>.env</code></a></li>
+  <li><a href="#fill-required-keys" id="toc-fill-required-keys" class="nav-link" data-scroll-target="#fill-required-keys">2. Fill Required Keys</a></li>
+  <li><a href="#reloading-changes" id="toc-reloading-changes" class="nav-link" data-scroll-target="#reloading-changes">3. Reloading Changes</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/env-vars.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -353,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">3&nbsp;·&nbsp;Environment Variables</h1>
+<h1 class="title">Environment Variables</h1>
 </div>
 
 
@@ -370,16 +354,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="environment-variables" class="level1">
-<h1>3&nbsp;·&nbsp;Environment Variables</h1>
+<section id="tldr" class="level1">
+<h1>TL;DR</h1>
 <p>The application loads configuration from a <strong>dotenv</strong> file so secrets never reach source control.</p>
 <section id="create-your-.env" class="level2">
-<h2 class="anchored" data-anchor-id="create-your-.env">3.1&nbsp;Create your <code>.env</code></h2>
+<h2 class="anchored" data-anchor-id="create-your-.env">1. Create your <code>.env</code></h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GitHub/AiTutor</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GitHub/AiTutor</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fill-required-keys" class="level2">
-<h2 class="anchored" data-anchor-id="fill-required-keys">3.2&nbsp;Fill Required Keys</h2>
+<h2 class="anchored" data-anchor-id="fill-required-keys">2. Fill Required Keys</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 15%">
@@ -412,11 +398,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>Open <code>.env</code> in your editor:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> .env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> .env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Any value left blank will cause the app to fail fast with a descriptive error.</p>
 </section>
 <section id="reloading-changes" class="level2">
-<h2 class="anchored" data-anchor-id="reloading-changes">3.3&nbsp;Reloading Changes</h2>
+<h2 class="anchored" data-anchor-id="reloading-changes">3. Reloading Changes</h2>
 <p>Values are read <strong>at application startup</strong>. Restart the dev server after edits.</p>
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">

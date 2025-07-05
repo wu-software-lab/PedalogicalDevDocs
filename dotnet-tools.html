@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp;·&nbsp;.&nbsp;NET Development Environment – Pedalogical Developer Docs</title>
+<title>.NET Tooling – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -291,32 +291,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="./new-dev-setup.html"> 
+<span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./package-managers.html"> 
-<span class="menu-text">Package&nbsp;Managers</span></a>
+    <a class="nav-link" href="./migrating-to-postgres.qmd"> 
+<span class="menu-text">Migrating to Postgres</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./git-clone.html"> 
-<span class="menu-text">Git&nbsp;&amp;&nbsp;Clone</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./env-vars.html"> 
-<span class="menu-text">Environment&nbsp;Variables</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./dotnet-tools.html" aria-current="page"> 
-<span class="menu-text">.&nbsp;NET&nbsp;Tooling</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./database.html"> 
-<span class="menu-text">Database&nbsp;Setup</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./migrations.html"> 
-<span class="menu-text">EF&nbsp;Migrations</span></a>
+    <a class="nav-link" href="./conventions.qmd"> 
+<span class="menu-text">Conventions</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -334,13 +318,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#net-development-environment" id="toc-net-development-environment" class="nav-link active" data-scroll-target="#net-development-environment">4&nbsp;·&nbsp;.&nbsp;NET Development Environment</a>
+  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
   <ul class="collapse">
-  <li><a href="#install-.net-sdk-9" id="toc-install-.net-sdk-9" class="nav-link" data-scroll-target="#install-.net-sdk-9">4.1&nbsp;Install .NET&nbsp;SDK&nbsp;9+</a></li>
-  <li><a href="#global-ef-core-cli" id="toc-global-ef-core-cli" class="nav-link" data-scroll-target="#global-ef-core-cli">4.2&nbsp;Global EF&nbsp;Core CLI</a></li>
-  <li><a href="#visual-studio-code" id="toc-visual-studio-code" class="nav-link" data-scroll-target="#visual-studio-code">4.3&nbsp;Visual Studio&nbsp;Code</a>
+  <li><a href="#install-.net-sdk-9" id="toc-install-.net-sdk-9" class="nav-link" data-scroll-target="#install-.net-sdk-9">1. Install .NET&nbsp;SDK&nbsp;9+</a></li>
+  <li><a href="#global-ef-core-cli" id="toc-global-ef-core-cli" class="nav-link" data-scroll-target="#global-ef-core-cli">2. Global EF&nbsp;Core CLI</a></li>
+  <li><a href="#visual-studio-code" id="toc-visual-studio-code" class="nav-link" data-scroll-target="#visual-studio-code">3. Visual Studio&nbsp;Code</a>
   <ul class="collapse">
-  <li><a href="#recommended-extensions" id="toc-recommended-extensions" class="nav-link" data-scroll-target="#recommended-extensions">Recommended Extensions</a></li>
+  <li><a href="#install-recommended-extensions" id="toc-install-recommended-extensions" class="nav-link" data-scroll-target="#install-recommended-extensions">4. Install Recommended Extensions</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -356,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">4&nbsp;·&nbsp;.&nbsp;NET Development Environment</h1>
+<h1 class="title">.NET Tooling</h1>
 </div>
 
 
@@ -373,11 +357,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="net-development-environment" class="level1">
-<h1>4&nbsp;·&nbsp;.&nbsp;NET Development Environment</h1>
-<p>We target <strong>.NET&nbsp;9&nbsp;LTS</strong> (preview until GA) and use <strong>Entity&nbsp;Framework&nbsp;Core&nbsp;9</strong> for data access.</p>
+<section id="tldr" class="level1">
+<h1>TL;DR</h1>
+<p>Set up a <strong>.NET&nbsp;9</strong> development environment for <strong>Pedalogical</strong>. This guide covers installing the .NET&nbsp;SDK, EF&nbsp;Core CLI, and Visual Studio&nbsp;Code with recommended extensions.</p>
 <section id="install-.net-sdk-9" class="level2">
-<h2 class="anchored" data-anchor-id="install-.net-sdk-9">4.1&nbsp;Install .NET&nbsp;SDK&nbsp;9+</h2>
+<h2 class="anchored" data-anchor-id="install-.net-sdk-9">1. Install .NET&nbsp;SDK&nbsp;9+</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -400,13 +384,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> <span class="at">--version</span>   <span class="co"># 9.x.x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="global-ef-core-cli" class="level2">
-<h2 class="anchored" data-anchor-id="global-ef-core-cli">4.2&nbsp;Global EF&nbsp;Core CLI</h2>
+<h2 class="anchored" data-anchor-id="global-ef-core-cli">2. Global EF&nbsp;Core CLI</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> tool install <span class="at">--global</span> dotnet-ef</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># add to PATH on macOS</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'export PATH="$HOME/.dotnet/tools:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.zprofile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="visual-studio-code" class="level2">
-<h2 class="anchored" data-anchor-id="visual-studio-code">4.3&nbsp;Visual Studio&nbsp;Code</h2>
+<h2 class="anchored" data-anchor-id="visual-studio-code">3. Visual Studio&nbsp;Code</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -423,8 +407,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>From VS&nbsp;Code <strong>Command Palette</strong> run:</p>
 <pre><code>Shell Command: Install 'code' command in PATH</code></pre>
-<section id="recommended-extensions" class="level3">
-<h3 class="anchored" data-anchor-id="recommended-extensions">Recommended Extensions</h3>
+<section id="install-recommended-extensions" class="level3">
+<h3 class="anchored" data-anchor-id="install-recommended-extensions">4. Install Recommended Extensions</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-dotnettools.csdevkit</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-dotnettools.csharp</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> jmrog.vscode-nuget-package-manager</span>
