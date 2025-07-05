@@ -32,7 +32,7 @@
     "href": "index.html",
     "title": "Welcome",
     "section": "",
-    "text": "Pedalogical Developer On‑Ramp 🚀\nWelcome to the Pedalogical Developer Docs — your single source of truth for getting a local development environment up and running in less than 30 minutes (coffee not included ☕).\nWhether you are:\n\nTotally new to the project and need everything installed,\n\nMigrating from our former SQL Server stack, or\n\nReturning after a hiatus and just need a refresher,\n\nstart at the top‑left sidebar and work downward. Every page ends with a Next Step link so you can cruise hands‑free.\n\nPro Tip\nKeep a terminal open next to these docs and copy‑paste as you go. Most commands are idempotent — if you run them twice nothing breaks.\n\nIf you hit a snag jump to Troubleshooting at the bottom of each page or post in the #dev‑help Discord channel."
+    "text": "Pedalogical Developer On‑Ramp 🚀\nWelcome to the Pedalogical Developer Docs — your single source of truth for getting a local development environment up and running in less than 30 minutes (coffee not included ☕).\nWhether you are:\n\nTotally new to the project and need everything installed,\n\nMigrating from our former SQL Server stack, or\n\nReturning after a hiatus and just need a refresher,\n\n\nPro Tip\nKeep a terminal open next to these docs and copy‑paste as you go. Most commands are idempotent — if you run them twice nothing breaks."
   },
   {
     "objectID": "git-clone.html",
