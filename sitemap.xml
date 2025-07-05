@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/new-dev-setup.html</loc>
-    <lastmod>2025-07-05T17:52:22.681Z</lastmod>
+    <lastmod>2025-07-05T19:31:52.977Z</lastmod>
   </url>
   <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/env-vars.html</loc>
-    <lastmod>2025-07-05T17:22:28.375Z</lastmod>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/package-managers.html</loc>
+    <lastmod>2025-07-05T17:20:40.448Z</lastmod>
   </url>
   <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/dotnet-tools.html</loc>
-    <lastmod>2025-07-05T17:46:56.289Z</lastmod>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/index.html</loc>
+    <lastmod>2025-07-05T16:55:34.015Z</lastmod>
   </url>
   <url>
     <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/git-clone.html</loc>
@@ -18,22 +18,22 @@
   </url>
   <url>
     <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/database.html</loc>
-    <lastmod>2025-07-05T17:44:48.232Z</lastmod>
+    <lastmod>2025-07-05T19:29:50.800Z</lastmod>
   </url>
   <url>
     <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/migrations.html</loc>
     <lastmod>2025-07-05T17:31:27.748Z</lastmod>
   </url>
   <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/first-run.html</loc>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/dotnet-tools.html</loc>
+    <lastmod>2025-07-05T17:46:56.289Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/env-vars.html</loc>
+    <lastmod>2025-07-05T17:22:28.375Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/run-app.html</loc>
     <lastmod>2025-07-05T17:40:09.522Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/index.html</loc>
-    <lastmod>2025-07-05T16:55:34.015Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/package-managers.html</loc>
-    <lastmod>2025-07-05T17:20:40.448Z</lastmod>
   </url>
 </urlset>

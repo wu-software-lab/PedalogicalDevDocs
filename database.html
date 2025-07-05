@@ -295,12 +295,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./migrating-to-postgres.qmd"> 
+    <a class="nav-link active" href="./database.html" aria-current="page"> 
 <span class="menu-text">Migrating to Postgres</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./conventions.qmd"> 
-<span class="menu-text">Conventions</span></a>
+    <span class="nav-link">
+<span class="menu-text">Conventions (TBD)</span>
+    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -367,6 +368,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="tldr" class="level1">
 <h1>TL;DR</h1>
 <p>Pedalogical uses <strong>PostgreSQL&nbsp;17</strong>. Choose between a native install or Docker container.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Which method should I pick?</strong></p>
+<p><em>Docker</em> is disposable, reproducible, and keeps your host clean.<br>
+<em>Native</em> is fine if you prefer <code>brew services</code> or need DB access when Docker isn’t running.</p>
+</div>
+</div>
 <hr>
 <section id="option-a-native-install" class="level2">
 <h2 class="anchored" data-anchor-id="option-a-native-install">Option&nbsp;A&nbsp;—&nbsp;Native Install</h2>
@@ -425,11 +441,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="configure-compose" class="level3">
 <h3 class="anchored" data-anchor-id="configure-compose">3.&nbsp;Configure Compose</h3>
+<p>Make a copy of the example <code>docker-compose.yml</code> file:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GitHub/AiTutor/Docker</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> docker-compose.example.yml docker-compose.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Edit <code>docker-compose.yml</code>:</p>
+<p>Edit <code>docker-compose.yml</code> and set the Postgres superuser password (obtain from Team Notion):</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> </span><span class="st">"yourStrongPassword"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> </span><span class="st">"Password"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="start-services" class="level3">
 <h3 class="anchored" data-anchor-id="start-services">4.&nbsp;Start Services</h3>
@@ -465,22 +482,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <em>Port</em>:&nbsp;<code>5433</code></li>
 </ol>
 <hr>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Which method should I pick?</strong></p>
-<p><em>Docker</em> is disposable, reproducible, and keeps your host clean.<br>
-<em>Native</em> is fine if you prefer <code>brew services</code> or need DB access when Docker isn’t running.</p>
-</div>
-</div>
-<hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -491,7 +492,7 @@ Next&nbsp;Step
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Do a <a href="./first-run.html"><strong>First Run of the App</strong></a>.</p>
+<p>Run the <a href="./run-app.html"><strong>App</strong></a>.</p>
 </div>
 </div>
 
