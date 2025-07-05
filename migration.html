@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>First App Run – Pedalogical Developer Docs</title>
+<title>Migration Guide for Existing Developers – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./migration.html"> 
+    <a class="nav-link active" href="./migration.html" aria-current="page"> 
 <span class="menu-text">DB Migration</span></a>
   </li>  
   <li class="nav-item">
@@ -319,17 +319,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
+  <li><a href="#migration-guide-existing-devs" id="toc-migration-guide-existing-devs" class="nav-link active" data-scroll-target="#migration-guide-existing-devs">🔄 Migration Guide (Existing Devs)</a>
   <ul class="collapse">
-  <li><a href="#initialize-the-database." id="toc-initialize-the-database." class="nav-link" data-scroll-target="#initialize-the-database.">1. Initialize the database.</a></li>
-  <li><a href="#verify-the-database-is-created-and-seeded" id="toc-verify-the-database-is-created-and-seeded" class="nav-link" data-scroll-target="#verify-the-database-is-created-and-seeded">2. Verify the database is created and seeded</a></li>
-  <li><a href="#run-the-application" id="toc-run-the-application" class="nav-link" data-scroll-target="#run-the-application">3. Run the application</a></li>
-  <li><a href="#access-the-app" id="toc-access-the-app" class="nav-link" data-scroll-target="#access-the-app">4. Access the app</a></li>
-  <li><a href="#verify-that-you-can-create-a-new-account" id="toc-verify-that-you-can-create-a-new-account" class="nav-link" data-scroll-target="#verify-that-you-can-create-a-new-account">5. Verify that you can create a new account</a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#move-secrets-to-.env" id="toc-move-secrets-to-.env" class="nav-link" data-scroll-target="#move-secrets-to-.env">1&nbsp;·&nbsp;Move Secrets to <code>.env</code></a></li>
+  <li><a href="#switch-from-sql-server-postgresql-17" id="toc-switch-from-sql-server-postgresql-17" class="nav-link" data-scroll-target="#switch-from-sql-server-postgresql-17">2&nbsp;·&nbsp;Switch from SQL&nbsp;Server&nbsp;→&nbsp;PostgreSQL&nbsp;17</a></li>
+  <li><a href="#smoketest-the-application" id="toc-smoketest-the-application" class="nav-link" data-scroll-target="#smoketest-the-application">3&nbsp;·&nbsp;Smoke‑Test the Application</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/run-app.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/migration.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -341,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">First App Run</h1>
+<h1 class="title">Migration Guide for Existing Developers</h1>
 </div>
 
 
@@ -358,67 +355,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="tldr" class="level1">
-<h1>TL;DR</h1>
-<p>Run the app to create the database and seed initial data.</p>
-<section id="initialize-the-database." class="level2">
-<h2 class="anchored" data-anchor-id="initialize-the-database.">1. Initialize the database.</h2>
-<p>From the root of the repository, run:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="migration-guide-existing-devs" class="level1">
+<h1>🔄 Migration Guide (Existing Devs)</h1>
+<p>This page walks long‑time Pedalogical contributors through the key changes needed to align with our <strong>current tech stack</strong>.</p>
+<hr>
+<section id="move-secrets-to-.env" class="level2">
+<h2 class="anchored" data-anchor-id="move-secrets-to-.env">1&nbsp;·&nbsp;Move Secrets to <code>.env</code></h2>
+<p>We no longer store connection strings or API keys in <code>appsettings.Development.json</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> .env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Populate <code>POSTGRES_PASSWORD</code>, <code>OPENAI_API_KEY</code>, and any other keys shown in the template.</p>
+</blockquote>
+<p><em>See full instructions →</em> <a href="./env-vars.html">Environment&nbsp;Variables</a></p>
+<hr>
 </section>
-<section id="verify-the-database-is-created-and-seeded" class="level2">
-<h2 class="anchored" data-anchor-id="verify-the-database-is-created-and-seeded">2. Verify the database is created and seeded</h2>
-<p>You can check the database using your preferred PostgreSQL client (e.g., pgAdmin, BeeHive, or command line). Look for the <code>pedalogical</code> database and verify that the initial tables and data are present.</p>
-<p>To verify via command line, you can run:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> postgres <span class="at">-d</span> pedalogical <span class="at">-c</span> <span class="st">"\dt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You should see tables like AspNetUsers, AspNetRoles, and others that were seeded during the initial run.</p>
+<section id="switch-from-sql-server-postgresql-17" class="level2">
+<h2 class="anchored" data-anchor-id="switch-from-sql-server-postgresql-17">2&nbsp;·&nbsp;Switch from SQL&nbsp;Server&nbsp;→&nbsp;PostgreSQL&nbsp;17</h2>
+<p>Local development now uses PostgreSQL.<br>
+Follow either the native install or Docker‑Compose option.</p>
+<p><em>See full instructions →</em> <a href="./database.html">Database&nbsp;Setup</a></p>
+<blockquote class="blockquote">
+<p>After switching engines, apply EF&nbsp;Core migrations before running the app.</p>
+</blockquote>
+<hr>
 </section>
-<section id="run-the-application" class="level2">
-<h2 class="anchored" data-anchor-id="run-the-application">3. Run the application</h2>
-<p>Run the application to create the initial data:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="access-the-app" class="level2">
-<h2 class="anchored" data-anchor-id="access-the-app">4. Access the app</h2>
-<p>Open your browser and navigate to <code>http://localhost:5000</code> to access the application.</p>
-</section>
-<section id="verify-that-you-can-create-a-new-account" class="level2">
-<h2 class="anchored" data-anchor-id="verify-that-you-can-create-a-new-account">5. Verify that you can create a new account</h2>
+<section id="smoketest-the-application" class="level2">
+<h2 class="anchored" data-anchor-id="smoketest-the-application">3&nbsp;·&nbsp;Smoke‑Test the Application</h2>
+<p>Run the app end‑to‑end to confirm the migration was successful.</p>
+<p><em>Guide →</em> <a href="./run-app.html">Run&nbsp;the&nbsp;App</a></p>
+<p>Checklist:</p>
 <ol type="1">
-<li>Click on the “Register” link.</li>
-<li>Fill out the registration form and submit it.</li>
-<li>Check your email for a confirmation link (it might be in your spam folder).</li>
-<li>Log in with the new account.</li>
+<li><code>dotnet build</code> succeeds.<br>
+</li>
+<li>EF&nbsp;Core migrations apply without errors.<br>
+</li>
+<li>API starts at <code>https://localhost:5001/swagger</code>.<br>
+</li>
+<li>Front‑end fetches sample data without 500s.</li>
 </ol>
-</section>
-<section id="troubleshooting" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 58%">
-<col style="width: 41%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Issue</th>
-<th>Fix</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database connection error</td>
-<td>Ensure your <code>.env</code> file has the correct <code>POSTGRES_PASSWORD</code> and that the database is running.</td>
-</tr>
-<tr class="even">
-<td>Application not starting</td>
-<td>Check the console output for errors, ensure all dependencies are installed, and that the database is initialized.</td>
-</tr>
-<tr class="odd">
-<td>Email not sending</td>
-<td>Verify you are connected to the internet and check your spam folder.</td>
-</tr>
-</tbody>
-</table>
 
 
 </section>
@@ -842,4 +817,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/run-app.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/migration.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

@@ -9,28 +9,32 @@
     <lastmod>2025-07-05T17:20:40.448Z</lastmod>
   </url>
   <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/index.html</loc>
-    <lastmod>2025-07-05T19:33:42.350Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/git-clone.html</loc>
-    <lastmod>2025-07-05T17:42:10.039Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/database.html</loc>
-    <lastmod>2025-07-05T19:34:27.239Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/migrations.html</loc>
-    <lastmod>2025-07-05T17:31:27.748Z</lastmod>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/migration.html</loc>
+    <lastmod>2025-07-05T19:49:44.188Z</lastmod>
   </url>
   <url>
     <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/dotnet-tools.html</loc>
     <lastmod>2025-07-05T17:46:56.289Z</lastmod>
   </url>
   <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/db-migrations.html</loc>
+    <lastmod>2025-07-05T17:31:27.748Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/database.html</loc>
+    <lastmod>2025-07-05T19:34:27.239Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/git-clone.html</loc>
+    <lastmod>2025-07-05T17:42:10.039Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/index.html</loc>
+    <lastmod>2025-07-05T19:33:42.350Z</lastmod>
+  </url>
+  <url>
     <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/env-vars.html</loc>
-    <lastmod>2025-07-05T17:22:28.375Z</lastmod>
+    <lastmod>2025-07-05T19:41:13.687Z</lastmod>
   </url>
   <url>
     <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/run-app.html</loc>

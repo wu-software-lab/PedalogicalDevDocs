@@ -295,8 +295,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./database.html"> 
-<span class="menu-text">Migrating to Postgres</span></a>
+    <a class="nav-link" href="./migration.html"> 
+<span class="menu-text">DB Migration</span></a>
   </li>  
   <li class="nav-item">
     <span class="nav-link">
@@ -383,8 +383,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><code>POSTGRES_PASSWORD</code></td>
-<td>Password for local/Docker Postgres superuser</td>
-<td>Choose your own</td>
+<td>Password for local/Docker Postgres</td>
+<td>Notion&nbsp;→&nbsp;Secrets</td>
 </tr>
 <tr class="even">
 <td><code>OPENAI_API_KEY</code></td>
@@ -392,8 +392,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Notion&nbsp;→&nbsp;Secrets</td>
 </tr>
 <tr class="odd">
-<td><code>AZURE_STORAGE_KEY</code></td>
-<td>Media uploads</td>
+<td><code>SENDGRID_API_KEY</code></td>
+<td>For sending emails</td>
+<td>Notion&nbsp;→&nbsp;Secrets</td>
+</tr>
+<tr class="even">
+<td><code>SONARQUBE_API_KEY</code></td>
+<td>For Code quality checks</td>
 <td>Notion&nbsp;→&nbsp;Secrets</td>
 </tr>
 </tbody>
