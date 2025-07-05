@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/package-managers.html</loc>
+    <lastmod>2025-07-05T16:55:34.015Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/index.html</loc>
+    <lastmod>2025-07-05T16:55:34.015Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/git-clone.html</loc>
+    <lastmod>2025-07-05T16:55:34.014Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/database.html</loc>
+    <lastmod>2025-07-05T16:55:34.014Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/migrations.html</loc>
+    <lastmod>2025-07-05T16:55:34.015Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/dotnet-tools.html</loc>
+    <lastmod>2025-07-05T16:55:34.014Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wu-software-lab.github.io/PedalogicalDevDocs/env-vars.html</loc>
+    <lastmod>2025-07-05T16:55:34.014Z</lastmod>
+  </url>
+</urlset>
