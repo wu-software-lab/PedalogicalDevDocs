@@ -1,0 +1,27 @@
+---
+title: "Developer On-Ramp"
+format: html
+---
+
+# 🚦 Developer On-Ramp Guide
+
+Follow these six steps in order to get Pedalogical running locally.  
+Each step links to a detailed page in this documentation set.
+
+1. **Package Manager** – install Homebrew (macOS) or Chocolatey (Windows)  
+   → [Package Managers](package-managers.qmd)
+
+2. **Getting the Code** – install Git and clone the repository  
+   → [Git & Clone](git-clone.qmd)
+
+3. **Installing Tools** – set up the .NET 9 SDK, EF Core CLI, VS Code, and extensions  
+   → [.NET Tooling](dotnet-tools.qmd)
+
+4. **Configuring Development Environment** – create `.env`, add Postgres password & API keys  
+   → [Environment Variables](env-vars.qmd)
+
+5. **Setting up Database** – choose a native install or Docker + pgAdmin and start Postgres  
+   → [Database Setup](database.qmd)
+
+6. **Run the App** – build, apply migrations, and launch the local API / UI  
+   → [First Run](run-app.qmd)

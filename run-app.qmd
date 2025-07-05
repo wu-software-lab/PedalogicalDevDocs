@@ -1,0 +1,55 @@
+---
+title: "First App Run"
+format: html
+---
+
+# TL;DR
+Run the app to create the database and seed initial data.
+
+## 1. Initialize the database.
+
+From the root of the repository, run:
+
+```bash
+dotnet ef database update
+```
+
+## 2. Verify the database is created and seeded
+
+You can check the database using your preferred PostgreSQL client (e.g., pgAdmin, BeeHive, or command line). Look for the `pedalogical` database and verify that the initial tables and data are present.
+
+To verify via command line, you can run:
+
+```bash
+psql -U postgres -d pedalogical -c "\dt"
+```
+
+You should see tables like AspNetUsers, AspNetRoles, and others that were seeded during the initial run.
+
+## 3. Run the application
+
+Run the application to create the initial data:
+
+```bash
+dotnet run
+```
+
+## 4. Access the app
+
+Open your browser and navigate to `http://localhost:5000` to access the application.
+
+## 5. Verify that you can create a new account
+
+1. Click on the "Register" link.
+2. Fill out the registration form and submit it.
+3. Check your email for a confirmation link (it might be in your spam folder).
+4. Log in with the new account.
+
+
+## Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| Database connection error | Ensure your `.env` file has the correct `POSTGRES_PASSWORD` and that the database is running. |
+| Application not starting | Check the console output for errors, ensure all dependencies are installed, and that the database is initialized. |
+| Email not sending | Verify you are connected to the internet and check your spam folder. |

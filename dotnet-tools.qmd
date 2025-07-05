@@ -1,13 +1,12 @@
 ---
-title: "4 · . NET Development Environment"
+title: ".NET Tooling"
 format: html
 ---
 
-# 4 · . NET Development Environment
+# TL;DR
+Set up a **.NET 9** development environment for **Pedalogical**. This guide covers installing the .NET SDK, EF Core CLI, and Visual Studio Code with recommended extensions.
 
-We target **.NET 9 LTS** (preview until GA) and use **Entity Framework Core 9** for data access.
-
-## 4.1 Install .NET SDK 9+
+## 1. Install .NET SDK 9+
 
 | Platform | Command |
 |----------|---------|
@@ -20,7 +19,7 @@ Verify:
 dotnet --version   # 9.x.x
 ```
 
-## 4.2 Global EF Core CLI
+## 2. Global EF Core CLI
 
 ```bash
 dotnet tool install --global dotnet-ef
@@ -28,7 +27,7 @@ dotnet tool install --global dotnet-ef
 echo 'export PATH="$HOME/.dotnet/tools:$PATH"' >> ~/.zprofile
 ```
 
-## 4.3 Visual Studio Code
+## 3. Visual Studio Code
 
 | macOS | Windows |
 |-------|---------|
@@ -40,7 +39,7 @@ From VS Code **Command Palette** run:
 Shell Command: Install 'code' command in PATH
 ```
 
-### Recommended Extensions
+### 4. Install Recommended Extensions
 
 ```bash
 code --install-extension ms-dotnettools.csdevkit

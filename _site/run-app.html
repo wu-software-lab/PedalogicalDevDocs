@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp;·&nbsp;Entity Framework Migrations – Pedalogical Developer Docs</title>
+<title>First App Run – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -291,32 +291,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="./new-dev-setup.html"> 
+<span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./package-managers.html"> 
-<span class="menu-text">Package&nbsp;Managers</span></a>
+    <a class="nav-link" href="./migration.html"> 
+<span class="menu-text">DB Migration</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./git-clone.html"> 
-<span class="menu-text">Git&nbsp;&amp;&nbsp;Clone</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./env-vars.html"> 
-<span class="menu-text">Environment&nbsp;Variables</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./dotnet-tools.html"> 
-<span class="menu-text">.&nbsp;NET&nbsp;Tooling</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./database.html"> 
-<span class="menu-text">Database&nbsp;Setup</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./migrations.html" aria-current="page"> 
-<span class="menu-text">EF&nbsp;Migrations</span></a>
+    <span class="nav-link">
+<span class="menu-text">Conventions (TBD)</span>
+    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -334,22 +319,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#entity-framework-migrations" id="toc-entity-framework-migrations" class="nav-link active" data-scroll-target="#entity-framework-migrations">6&nbsp;·&nbsp;Entity Framework Migrations</a>
+  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
   <ul class="collapse">
-  <li><a href="#initial-database-creation" id="toc-initial-database-creation" class="nav-link" data-scroll-target="#initial-database-creation">6.1&nbsp;Initial Database Creation</a></li>
-  <li><a href="#adding-a-migration-model-change" id="toc-adding-a-migration-model-change" class="nav-link" data-scroll-target="#adding-a-migration-model-change">6.2&nbsp;Adding a Migration (Model Change)</a>
-  <ul class="collapse">
-  <li><a href="#naming-convention" id="toc-naming-convention" class="nav-link" data-scroll-target="#naming-convention">Naming Convention</a></li>
-  </ul></li>
-  <li><a href="#undo-the-last-migration" id="toc-undo-the-last-migration" class="nav-link" data-scroll-target="#undo-the-last-migration">6.3&nbsp;Undo the Last Migration</a></li>
-  <li><a href="#migrate-to-a-specific-version" id="toc-migrate-to-a-specific-version" class="nav-link" data-scroll-target="#migrate-to-a-specific-version">6.4&nbsp;Migrate to a Specific Version</a></li>
-  <li><a href="#refreshing-the-database-nuke-pave" id="toc-refreshing-the-database-nuke-pave" class="nav-link" data-scroll-target="#refreshing-the-database-nuke-pave">6.5&nbsp;Refreshing the Database (nuke &amp; pave)</a>
-  <ul class="collapse">
+  <li><a href="#initialize-the-database." id="toc-initialize-the-database." class="nav-link" data-scroll-target="#initialize-the-database.">1. Initialize the database.</a></li>
+  <li><a href="#verify-the-database-is-created-and-seeded" id="toc-verify-the-database-is-created-and-seeded" class="nav-link" data-scroll-target="#verify-the-database-is-created-and-seeded">2. Verify the database is created and seeded</a></li>
+  <li><a href="#run-the-application" id="toc-run-the-application" class="nav-link" data-scroll-target="#run-the-application">3. Run the application</a></li>
+  <li><a href="#access-the-app" id="toc-access-the-app" class="nav-link" data-scroll-target="#access-the-app">4. Access the app</a></li>
+  <li><a href="#verify-that-you-can-create-a-new-account" id="toc-verify-that-you-can-create-a-new-account" class="nav-link" data-scroll-target="#verify-that-you-can-create-a-new-account">5. Verify that you can create a new account</a></li>
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   </ul></li>
-  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/migrations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/run-app.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -361,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">6&nbsp;·&nbsp;Entity Framework Migrations</h1>
+<h1 class="title">First App Run</h1>
 </div>
 
 
@@ -378,44 +358,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="entity-framework-migrations" class="level1">
-<h1>6&nbsp;·&nbsp;Entity Framework Migrations</h1>
-<p>Entity Framework Core keeps the Postgres schema in sync with your C# models.</p>
-<section id="initial-database-creation" class="level2">
-<h2 class="anchored" data-anchor-id="initial-database-creation">6.1&nbsp;Initial Database Creation</h2>
-<p>Run once per environment:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update <span class="at">--project</span> src/Pedalogical.Data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="tldr" class="level1">
+<h1>TL;DR</h1>
+<p>Run the app to create the database and seed initial data.</p>
+<section id="initialize-the-database." class="level2">
+<h2 class="anchored" data-anchor-id="initialize-the-database.">1. Initialize the database.</h2>
+<p>From the root of the repository, run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="adding-a-migration-model-change" class="level2">
-<h2 class="anchored" data-anchor-id="adding-a-migration-model-change">6.2&nbsp;Adding a Migration (Model Change)</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef migrations add <span class="op">&lt;</span>Feature<span class="op">&gt;</span>_<span class="op">&lt;</span>DateUTC<span class="op">&gt;</span>   --project src/Pedalogical.Data   <span class="at">--startup-project</span> src/Pedalogical.Api</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update <span class="at">--project</span> src/Pedalogical.Data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="naming-convention" class="level3">
-<h3 class="anchored" data-anchor-id="naming-convention">Naming Convention</h3>
-<pre><code>&lt;Verb&gt;&lt;Entity&gt;&lt;WhatChanged&gt;_&lt;yyyymmddHHMM&gt;</code></pre>
-<p>Examples:</p>
-<ul>
-<li><code>AddStudentEmail_202507052130</code></li>
-<li><code>RenameCourseTable_20250710</code></li>
-</ul>
+<section id="verify-the-database-is-created-and-seeded" class="level2">
+<h2 class="anchored" data-anchor-id="verify-the-database-is-created-and-seeded">2. Verify the database is created and seeded</h2>
+<p>You can check the database using your preferred PostgreSQL client (e.g., pgAdmin, BeeHive, or command line). Look for the <code>pedalogical</code> database and verify that the initial tables and data are present.</p>
+<p>To verify via command line, you can run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> postgres <span class="at">-d</span> pedalogical <span class="at">-c</span> <span class="st">"\dt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should see tables like AspNetUsers, AspNetRoles, and others that were seeded during the initial run.</p>
 </section>
+<section id="run-the-application" class="level2">
+<h2 class="anchored" data-anchor-id="run-the-application">3. Run the application</h2>
+<p>Run the application to create the initial data:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="undo-the-last-migration" class="level2">
-<h2 class="anchored" data-anchor-id="undo-the-last-migration">6.3&nbsp;Undo the Last Migration</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef migrations remove <span class="at">--project</span> src/Pedalogical.Data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="access-the-app" class="level2">
+<h2 class="anchored" data-anchor-id="access-the-app">4. Access the app</h2>
+<p>Open your browser and navigate to <code>http://localhost:5000</code> to access the application.</p>
 </section>
-<section id="migrate-to-a-specific-version" class="level2">
-<h2 class="anchored" data-anchor-id="migrate-to-a-specific-version">6.4&nbsp;Migrate to a Specific Version</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update 202507052130 <span class="at">--project</span> src/Pedalogical.Data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="verify-that-you-can-create-a-new-account" class="level2">
+<h2 class="anchored" data-anchor-id="verify-that-you-can-create-a-new-account">5. Verify that you can create a new account</h2>
+<ol type="1">
+<li>Click on the “Register” link.</li>
+<li>Fill out the registration form and submit it.</li>
+<li>Check your email for a confirmation link (it might be in your spam folder).</li>
+<li>Log in with the new account.</li>
+</ol>
 </section>
-<section id="refreshing-the-database-nuke-pave" class="level2">
-<h2 class="anchored" data-anchor-id="refreshing-the-database-nuke-pave">6.5&nbsp;Refreshing the Database (nuke &amp; pave)</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dropdb</span> pedalogical           <span class="co"># native</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">createdb</span> pedalogical</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-<section id="troubleshooting" class="level3">
-<h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 58%">
@@ -429,20 +406,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>Build failed</code></td>
-<td>Ensure the solution builds before running <code>dotnet ef</code>.</td>
+<td>Database connection error</td>
+<td>Ensure your <code>.env</code> file has the correct <code>POSTGRES_PASSWORD</code> and that the database is running.</td>
 </tr>
 <tr class="even">
-<td><code>No migrations were applied</code></td>
-<td>You already ran them — verify with <code>select * from __EFMigrationsHistory;</code>.</td>
+<td>Application not starting</td>
+<td>Check the console output for errors, ensure all dependencies are installed, and that the database is initialized.</td>
+</tr>
+<tr class="odd">
+<td>Email not sending</td>
+<td>Verify you are connected to the internet and check your spam folder.</td>
 </tr>
 </tbody>
 </table>
-<hr>
-<p>🎉 <em>You now have a fully functioning Pedalogical dev environment!</em></p>
 
 
-</section>
 </section>
 </section>
 
@@ -532,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/wu-software-lab\.github\.io\/PedalogicalDevDocs\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -864,4 +842,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/migrations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/run-app.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp;·&nbsp;Database Setup – Pedalogical Developer Docs</title>
+<title>Database Setup – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -291,32 +291,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="./new-dev-setup.html"> 
+<span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./package-managers.html"> 
-<span class="menu-text">Package&nbsp;Managers</span></a>
+    <a class="nav-link" href="./migration.html"> 
+<span class="menu-text">DB Migration</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./git-clone.html"> 
-<span class="menu-text">Git&nbsp;&amp;&nbsp;Clone</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./env-vars.html"> 
-<span class="menu-text">Environment&nbsp;Variables</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./dotnet-tools.html"> 
-<span class="menu-text">.&nbsp;NET&nbsp;Tooling</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./database.html" aria-current="page"> 
-<span class="menu-text">Database&nbsp;Setup</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./migrations.html"> 
-<span class="menu-text">EF&nbsp;Migrations</span></a>
+    <span class="nav-link">
+<span class="menu-text">Conventions (TBD)</span>
+    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -334,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#database-setup" id="toc-database-setup" class="nav-link active" data-scroll-target="#database-setup">5&nbsp;·&nbsp;Database Setup</a>
+  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
   <ul class="collapse">
   <li><a href="#option-a-native-install" id="toc-option-a-native-install" class="nav-link" data-scroll-target="#option-a-native-install">Option&nbsp;A&nbsp;—&nbsp;Native Install</a>
   <ul class="collapse">
@@ -363,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">5&nbsp;·&nbsp;Database Setup</h1>
+<h1 class="title">Database Setup</h1>
 </div>
 
 
@@ -380,16 +365,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="database-setup" class="level1">
-<h1>5&nbsp;·&nbsp;Database Setup</h1>
-<p>Pedalogical uses <strong>PostgreSQL&nbsp;17</strong>. Pick <strong>one</strong> of the two methods below.</p>
-<hr>
+<section id="tldr" class="level1">
+<h1>TL;DR</h1>
+<p>Pedalogical uses <strong>PostgreSQL&nbsp;17</strong>. Choose between a native install or Docker container.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Which method should I pick?</strong></p>
+<p><em>Docker</em> is disposable, reproducible, and keeps your host clean.<br>
+<em>Native</em> is fine if you prefer <code>brew services</code> or need DB access when Docker isn’t running.</p>
+</div>
+</div>
 <section id="option-a-native-install" class="level2">
 <h2 class="anchored" data-anchor-id="option-a-native-install">Option&nbsp;A&nbsp;—&nbsp;Native Install</h2>
 <section id="macos" class="level3">
 <h3 class="anchored" data-anchor-id="macos">macOS</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install postgresql@17</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> services start postgresql@17          <span class="co"># auto‑starts at login</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> services start postgresql@17          <span class="co"># auto‑starts at login</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> pgadmin4          </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Default data directory ➜ <code>/opt/homebrew/var/postgresql@17</code></p>
 </section>
 <section id="windows" class="level3">
@@ -440,11 +440,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="configure-compose" class="level3">
 <h3 class="anchored" data-anchor-id="configure-compose">3.&nbsp;Configure Compose</h3>
+<p>Make a copy of the example <code>docker-compose.yml</code> file:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GitHub/AiTutor/Docker</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> docker-compose.example.yml docker-compose.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Edit <code>docker-compose.yml</code>:</p>
+<p>Edit <code>docker-compose.yml</code> and set the Postgres superuser password (obtain from Team Notion):</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> </span><span class="st">"yourStrongPassword"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> </span><span class="st">"Password"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="start-services" class="level3">
 <h3 class="anchored" data-anchor-id="start-services">4.&nbsp;Start Services</h3>
@@ -480,22 +481,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <em>Port</em>:&nbsp;<code>5433</code></li>
 </ol>
 <hr>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Which method should I pick?</strong></p>
-<p><em>Docker</em> is disposable, reproducible, and keeps your host clean.<br>
-<em>Native</em> is fine if you prefer <code>brew services</code> or need DB access when Docker isn’t running.</p>
-</div>
-</div>
-<hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -506,7 +491,7 @@ Next&nbsp;Step
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Run <a href="./migrations.html"><strong>EF&nbsp;Core&nbsp;Migrations</strong></a>.</p>
+<p>Run the <a href="./run-app.html"><strong>App</strong></a>.</p>
 </div>
 </div>
 
@@ -601,7 +586,7 @@ Next&nbsp;Step
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/wu-software-lab\.github\.io\/PedalogicalDevDocs\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

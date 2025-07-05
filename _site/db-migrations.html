@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Package Managers – Pedalogical Developer Docs</title>
+<title>Database Migrations – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -321,14 +321,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
   <ul class="collapse">
-  <li><a href="#macos-homebrew" id="toc-macos-homebrew" class="nav-link" data-scroll-target="#macos-homebrew">macOS&nbsp;–&nbsp;Homebrew 🍺</a>
+  <li><a href="#initial-database-creation" id="toc-initial-database-creation" class="nav-link" data-scroll-target="#initial-database-creation">1. Initial Database Creation</a></li>
+  <li><a href="#adding-a-migration-model-change" id="toc-adding-a-migration-model-change" class="nav-link" data-scroll-target="#adding-a-migration-model-change">2. Adding a Migration (Model Change)</a>
   <ul class="collapse">
-  <li><a href="#keeping-brew-uptodate" id="toc-keeping-brew-uptodate" class="nav-link" data-scroll-target="#keeping-brew-uptodate">Keeping Brew up‑to‑date</a></li>
+  <li><a href="#naming-convention" id="toc-naming-convention" class="nav-link" data-scroll-target="#naming-convention">Naming Convention</a></li>
   </ul></li>
-  <li><a href="#windows-chocolatey" id="toc-windows-chocolatey" class="nav-link" data-scroll-target="#windows-chocolatey">Windows&nbsp;–&nbsp;Chocolatey 🍫</a></li>
+  <li><a href="#undo-the-last-migration" id="toc-undo-the-last-migration" class="nav-link" data-scroll-target="#undo-the-last-migration">3. Undo the Last Migration</a></li>
+  <li><a href="#migrate-to-a-specific-version" id="toc-migrate-to-a-specific-version" class="nav-link" data-scroll-target="#migrate-to-a-specific-version">4. Migrate to a Specific Version</a></li>
+  <li><a href="#refreshing-the-database-nuke-pave" id="toc-refreshing-the-database-nuke-pave" class="nav-link" data-scroll-target="#refreshing-the-database-nuke-pave">5. Refreshing the Database (nuke &amp; pave)</a>
+  <ul class="collapse">
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  </ul></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/package-managers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/db-migrations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -340,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Package Managers</h1>
+<h1 class="title">Database Migrations</h1>
 </div>
 
 
@@ -359,46 +365,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="tldr" class="level1">
 <h1>TL;DR</h1>
-<p>We strongly recommend installing all tooling through a package manager — it keeps dependencies <strong>repeatable</strong> and <strong>easy to upgrade</strong>.</p>
-<section id="macos-homebrew" class="level2">
-<h2 class="anchored" data-anchor-id="macos-homebrew">macOS&nbsp;–&nbsp;Homebrew 🍺</h2>
-<p>Homebrew installs under <code>/opt/homebrew</code> (Apple&nbsp;Silicon) or <code>/usr/local</code> (Intel).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">"</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(/opt/homebrew/bin/brew shellenv)"'</span> <span class="op">&gt;&gt;</span> ~/.zprofile   <span class="co"># Apple&nbsp;Silicon</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> doctor          <span class="co"># Verify install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="keeping-brew-uptodate" class="level3">
-<h3 class="anchored" data-anchor-id="keeping-brew-uptodate">Keeping Brew up‑to‑date</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> update          <span class="co"># refresh formulas</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> upgrade         <span class="co"># upgrade all packages</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This guide covers how to manage database migrations, which are used to evolve the database schema as your C# models change.</p>
+<section id="initial-database-creation" class="level2">
+<h2 class="anchored" data-anchor-id="initial-database-creation">1. Initial Database Creation</h2>
+<p>From the root of the repository, run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="adding-a-migration-model-change" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-migration-model-change">2. Adding a Migration (Model Change)</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef migrations add <span class="op">&lt;</span>Feature<span class="op">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="naming-convention" class="level3">
+<h3 class="anchored" data-anchor-id="naming-convention">Naming Convention</h3>
+<pre><code>&lt;Verb&gt;&lt;Entity&gt;&lt;WhatChanged&gt;</code></pre>
+<p>Examples:</p>
+<ul>
+<li><code>AddStudentEmail</code></li>
+<li><code>RenameCourseTable</code></li>
+</ul>
 </section>
 </section>
-<section id="windows-chocolatey" class="level2">
-<h2 class="anchored" data-anchor-id="windows-chocolatey">Windows&nbsp;–&nbsp;Chocolatey 🍫</h2>
-<p>Chocolatey installs to <code>C:\ProgramData\chocolatey</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-ExecutionPolicy</span> Bypass <span class="op">-</span>Scope <span class="cf">Process</span> <span class="op">-</span>Force</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>System<span class="op">.</span><span class="fu">Net</span><span class="op">.</span><span class="fu">ServicePointManager</span><span class="op">]::</span>SecurityProtocol <span class="op">=</span> <span class="dv">3072</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">iex</span> <span class="op">((</span><span class="fu">New-Object</span> System<span class="op">.</span><span class="fu">Net</span><span class="op">.</span><span class="fu">WebClient</span><span class="op">).</span><span class="fu">DownloadString</span><span class="op">(</span><span class="st">'https://community.chocolatey.org/install.ps1'</span><span class="op">))</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>choco upgrade chocolatey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p><strong>Why not Winget?</strong><br>
-Chocolatey covers everything we need <em>and</em> works on Server&nbsp;2022 machines used in CI.</p>
-</blockquote>
+<section id="undo-the-last-migration" class="level2">
+<h2 class="anchored" data-anchor-id="undo-the-last-migration">3. Undo the Last Migration</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef migrations remove </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="migrate-to-a-specific-version" class="level2">
+<h2 class="anchored" data-anchor-id="migrate-to-a-specific-version">4. Migrate to a Specific Version</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update <span class="op">&lt;</span>MigrationName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="refreshing-the-database-nuke-pave" class="level2">
+<h2 class="anchored" data-anchor-id="refreshing-the-database-nuke-pave">5. Refreshing the Database (nuke &amp; pave)</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dropdb</span> pedalogical           <span class="co"># native</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">createdb</span> pedalogical</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> ef database update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Next&nbsp;Step
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Head to <a href="./git-clone.html"><strong>Git&nbsp;&amp;&nbsp;Clone</strong></a> to install Git and pull the codebase.</p>
-</div>
-</div>
+<section id="troubleshooting" class="level3">
+<h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 58%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Issue</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Build failed</code></td>
+<td>Ensure the solution builds before running <code>dotnet ef</code>.</td>
+</tr>
+<tr class="even">
+<td><code>No migrations were applied</code></td>
+<td>You already ran them — verify with <code>select * from __EFMigrationsHistory;</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>🎉 <em>You now have a fully functioning Pedalogical dev environment!</em></p>
 
 
+</section>
 </section>
 </section>
 
@@ -820,4 +849,4 @@ Next&nbsp;Step
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/package-managers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/db-migrations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

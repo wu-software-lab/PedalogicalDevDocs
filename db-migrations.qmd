@@ -1,0 +1,66 @@
+---
+title: "Database Migrations"
+format: html
+---
+
+# TL;DR
+This guide covers how to manage database migrations, which are used to evolve the database schema as your C# models change.
+
+## 1. Initial Database Creation
+
+From the root of the repository, run:
+
+```bash
+dotnet ef database update 
+```
+
+## 2. Adding a Migration (Model Change)
+
+```bash
+dotnet ef migrations add <Feature>
+dotnet ef database update
+```
+
+### Naming Convention
+
+```
+<Verb><Entity><WhatChanged>
+```
+
+Examples:
+
+* `AddStudentEmail`
+* `RenameCourseTable`
+
+## 3. Undo the Last Migration
+
+```bash
+dotnet ef migrations remove 
+```
+
+## 4. Migrate to a Specific Version
+
+```bash
+dotnet ef database update <MigrationName>
+```
+
+## 5. Refreshing the Database (nuke & pave)
+
+```bash
+dropdb pedalogical           # native
+createdb pedalogical
+dotnet ef database update
+```
+
+---
+
+### Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| `Build failed` | Ensure the solution builds before running `dotnet ef`. |
+| `No migrations were applied` | You already ran them — verify with `select * from __EFMigrationsHistory;`. |
+
+---
+
+🎉 *You now have a fully functioning Pedalogical dev environment!*

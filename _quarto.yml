@@ -7,20 +7,11 @@ website:
   repo-actions: [edit, issue]
   navbar:
     left:
-      - text: "Overview"
-        href: index.qmd
-      - text: "Package Managers"
-        href: package-managers.qmd
-      - text: "Git & Clone"
-        href: git-clone.qmd
-      - text: "Environment Variables"
-        href: env-vars.qmd
-      - text: ". NET Tooling"
-        href: dotnet-tools.qmd
-      - text: "Database Setup"
-        href: database.qmd
-      - text: "EF Migrations"
-        href: migrations.qmd
+      - text: "New Dev Setup"
+        href: new-dev-setup.qmd
+      - text: "DB Migration"
+        href: migration.qmd
+      - text: "Conventions (TBD)"
 
 format:
   html:

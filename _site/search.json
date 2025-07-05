@@ -1,177 +1,261 @@
 [
   {
+    "objectID": "new-dev-setup.html",
+    "href": "new-dev-setup.html",
+    "title": "Developer On-Ramp",
+    "section": "",
+    "text": "🚦 Developer On-Ramp Guide\nFollow these six steps in order to get Pedalogical running locally.\nEach step links to a detailed page in this documentation set.\n\nPackage Manager – install Homebrew (macOS) or Chocolatey (Windows)\n→ Package Managers\nGetting the Code – install Git and clone the repository\n→ Git & Clone\nInstalling Tools – set up the .NET 9 SDK, EF Core CLI, VS Code, and extensions\n→ .NET Tooling\nConfiguring Development Environment – create .env, add Postgres password & API keys\n→ Environment Variables\nSetting up Database – choose a native install or Docker + pgAdmin and start Postgres\n→ Database Setup\nRun the App – build, apply migrations, and launch the local API / UI\n→ First Run"
+  },
+  {
     "objectID": "package-managers.html",
     "href": "package-managers.html",
-    "title": "1 · Package Managers",
+    "title": "Package Managers",
     "section": "",
     "text": "We strongly recommend installing all tooling through a package manager — it keeps dependencies repeatable and easy to upgrade.\n\n\nHomebrew installs under /opt/homebrew (Apple Silicon) or /usr/local (Intel).\n/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"\necho 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' &gt;&gt; ~/.zprofile   # Apple Silicon\nbrew doctor          # Verify install\n\n\nbrew update          # refresh formulas\nbrew upgrade         # upgrade all packages\n\n\n\n\nChocolatey installs to C:\\ProgramData\\chocolatey.\nSet-ExecutionPolicy Bypass -Scope Process -Force\n[System.Net.ServicePointManager]::SecurityProtocol = 3072\niex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))\nchoco upgrade chocolatey\n\nWhy not Winget?\nChocolatey covers everything we need and works on Server 2022 machines used in CI.\n\n\n\n\n\n\n\n\nNext Step\n\n\n\nHead to Git & Clone to install Git and pull the codebase."
   },
   {
     "objectID": "package-managers.html#macos-homebrew",
     "href": "package-managers.html#macos-homebrew",
-    "title": "1 · Package Managers",
+    "title": "Package Managers",
     "section": "",
     "text": "Homebrew installs under /opt/homebrew (Apple Silicon) or /usr/local (Intel).\n/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"\necho 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' &gt;&gt; ~/.zprofile   # Apple Silicon\nbrew doctor          # Verify install\n\n\nbrew update          # refresh formulas\nbrew upgrade         # upgrade all packages"
   },
   {
     "objectID": "package-managers.html#windows-chocolatey",
     "href": "package-managers.html#windows-chocolatey",
-    "title": "1 · Package Managers",
+    "title": "Package Managers",
     "section": "",
     "text": "Chocolatey installs to C:\\ProgramData\\chocolatey.\nSet-ExecutionPolicy Bypass -Scope Process -Force\n[System.Net.ServicePointManager]::SecurityProtocol = 3072\niex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))\nchoco upgrade chocolatey\n\nWhy not Winget?\nChocolatey covers everything we need and works on Server 2022 machines used in CI.\n\n\n\n\n\n\n\n\nNext Step\n\n\n\nHead to Git & Clone to install Git and pull the codebase."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome",
+    "objectID": "migration.html",
+    "href": "migration.html",
+    "title": "Migration Guide for Existing Developers",
     "section": "",
-    "text": "Pedalogical Developer On‑Ramp 🚀\nWelcome to the Pedalogical Developer Docs — your single source of truth for getting a local development environment up and running in less than 30 minutes (coffee not included ☕).\nWhether you are:\n\nTotally new to the project and need everything installed,\n\nMigrating from our former SQL Server stack, or\n\nReturning after a hiatus and just need a refresher,\n\nstart at the top‑left sidebar and work downward. Every page ends with a Next Step link so you can cruise hands‑free.\n\nPro Tip\nKeep a terminal open next to these docs and copy‑paste as you go. Most commands are idempotent — if you run them twice nothing breaks.\n\nIf you hit a snag jump to Troubleshooting at the bottom of each page or post in the #dev‑help Discord channel."
+    "text": "This page walks long‑time Pedalogical contributors through the key changes needed to align with our current tech stack.\n\n\n\nWe no longer store connection strings or API keys in appsettings.Development.json.\ncp .env.example .env\ncode .env\n\nPopulate POSTGRES_PASSWORD, OPENAI_API_KEY, and any other keys shown in the template.\n\nSee full instructions → Environment Variables\n\n\n\n\nLocal development now uses PostgreSQL.\nFollow either the native install or Docker‑Compose option.\nSee full instructions → Database Setup\n\nAfter switching engines, apply EF Core migrations before running the app.\n\n\n\n\n\nRun the app end‑to‑end to confirm the migration was successful.\nGuide → Run the App\nChecklist:\n\ndotnet build succeeds.\n\nEF Core migrations apply without errors.\n\nAPI starts at https://localhost:5001/swagger.\n\nFront‑end fetches sample data without 500s."
   },
   {
-    "objectID": "git-clone.html",
-    "href": "git-clone.html",
-    "title": "2 · Git & Clone",
+    "objectID": "migration.html#move-secrets-to-.env",
+    "href": "migration.html#move-secrets-to-.env",
+    "title": "Migration Guide for Existing Developers",
     "section": "",
-    "text": "Platform\nInstall\nVerify\n\n\n\n\nmacOS\nbrew install git\ngit --version\n\n\nWindows\nchoco install git -y\ngit --version\n\n\n\n\nIf macOS prompts for Xcode Command‑Line Tools, accept the install — Homebrew relies on them.\n\n\n\n\nssh-keygen -t ed25519 -C \"you@willamette.edu\"\npbcopy &lt; ~/.ssh/id_ed25519.pub   # macOS\ncat ~/.ssh/id_ed25519.pub        # Windows Git Bash\nAdd the key to your GitHub account (Settings → SSH Keys).\n\n\n\nWe keep all project repos in ~/GitHub for consistency.\ncd ~\nmkdir -p GitHub && cd GitHub\ngit clone git@github.com:wu-software-lab/AiTutor.git   # SSH\n# or\ngit clone https://github.com/wu-software-lab/AiTutor.git  # HTTPS\ncd AiTutor\ngit status\n\n\ngit remote add upstream https://github.com/wu-software-lab/AiTutor.git\ngit pull upstream main\n\n\n\n\n\n\n\nNext Step\n\n\n\nConfigure your Environment Variables."
+    "text": "We no longer store connection strings or API keys in appsettings.Development.json.\ncp .env.example .env\ncode .env\n\nPopulate POSTGRES_PASSWORD, OPENAI_API_KEY, and any other keys shown in the template.\n\nSee full instructions → Environment Variables"
   },
   {
-    "objectID": "git-clone.html#install-git",
-    "href": "git-clone.html#install-git",
-    "title": "2 · Git & Clone",
+    "objectID": "migration.html#switch-from-sql-server-postgresql-17",
+    "href": "migration.html#switch-from-sql-server-postgresql-17",
+    "title": "Migration Guide for Existing Developers",
     "section": "",
-    "text": "Platform\nInstall\nVerify\n\n\n\n\nmacOS\nbrew install git\ngit --version\n\n\nWindows\nchoco install git -y\ngit --version\n\n\n\n\nIf macOS prompts for Xcode Command‑Line Tools, accept the install — Homebrew relies on them."
+    "text": "Local development now uses PostgreSQL.\nFollow either the native install or Docker‑Compose option.\nSee full instructions → Database Setup\n\nAfter switching engines, apply EF Core migrations before running the app."
   },
   {
-    "objectID": "git-clone.html#generate-an-ssh-key-optional",
-    "href": "git-clone.html#generate-an-ssh-key-optional",
-    "title": "2 · Git & Clone",
+    "objectID": "migration.html#smoketest-the-application",
+    "href": "migration.html#smoketest-the-application",
+    "title": "Migration Guide for Existing Developers",
     "section": "",
-    "text": "ssh-keygen -t ed25519 -C \"you@willamette.edu\"\npbcopy &lt; ~/.ssh/id_ed25519.pub   # macOS\ncat ~/.ssh/id_ed25519.pub        # Windows Git Bash\nAdd the key to your GitHub account (Settings → SSH Keys)."
-  },
-  {
-    "objectID": "git-clone.html#clone-pedalogical",
-    "href": "git-clone.html#clone-pedalogical",
-    "title": "2 · Git & Clone",
-    "section": "",
-    "text": "We keep all project repos in ~/GitHub for consistency.\ncd ~\nmkdir -p GitHub && cd GitHub\ngit clone git@github.com:wu-software-lab/AiTutor.git   # SSH\n# or\ngit clone https://github.com/wu-software-lab/AiTutor.git  # HTTPS\ncd AiTutor\ngit status\n\n\ngit remote add upstream https://github.com/wu-software-lab/AiTutor.git\ngit pull upstream main\n\n\n\n\n\n\n\nNext Step\n\n\n\nConfigure your Environment Variables."
-  },
-  {
-    "objectID": "database.html",
-    "href": "database.html",
-    "title": "5 · Database Setup",
-    "section": "",
-    "text": "Pedalogical uses PostgreSQL 17. Pick one of the two methods below.\n\n\n\n\n\nbrew install postgresql@17\nbrew services start postgresql@17          # auto‑starts at login\nDefault data directory ➜ /opt/homebrew/var/postgresql@17\n\n\n\nchoco install postgresql17 -y\n# Accept installer prompts and set the superuser password\npgAdmin is offered in the EnterpriseDB installer, or install via Chocolatey:\nchoco install pgadmin4 -y\n\n\n\n\n\n\n\n\n\n\nmacOS\nWindows\n\n\n\n\nbrew install --cask docker\nchoco install docker-desktop -y\n\n\n\nLaunch Docker Desktop once to finish post‑install steps.\n\n\n\n\n\n\nmacOS\nWindows\n\n\n\n\nbrew install --cask pgadmin4\nchoco install pgadmin4 -y\n\n\n\n\n\n\ncd ~/GitHub/AiTutor/Docker\ncp docker-compose.example.yml docker-compose.yml\nEdit docker-compose.yml:\nenvironment:\n  POSTGRES_PASSWORD: \"yourStrongPassword\"\n\n\n\ndocker-compose up -d\ndocker ps           # verify 'pedalogical-db' is healthy\nPorts (default):\n\n\n\nService\nHost Port\n\n\n\n\nPostgres\n5433\n\n\npgAdmin\n8080\n\n\n\n\n\n\n\n\nOpen http://localhost:8080\nAdd new server:\nHost : host.docker.internal (mac/Win)\nPort: 5433\n\n\n\n\n\n\n\n\nTip\n\n\n\nWhich method should I pick?\nDocker is disposable, reproducible, and keeps your host clean.\nNative is fine if you prefer brew services or need DB access when Docker isn’t running.\n\n\n\n\n\n\n\n\n\nNext Step\n\n\n\nRun EF Core Migrations."
-  },
-  {
-    "objectID": "database.html#option-a-native-install",
-    "href": "database.html#option-a-native-install",
-    "title": "5 · Database Setup",
-    "section": "",
-    "text": "brew install postgresql@17\nbrew services start postgresql@17          # auto‑starts at login\nDefault data directory ➜ /opt/homebrew/var/postgresql@17\n\n\n\nchoco install postgresql17 -y\n# Accept installer prompts and set the superuser password\npgAdmin is offered in the EnterpriseDB installer, or install via Chocolatey:\nchoco install pgadmin4 -y"
-  },
-  {
-    "objectID": "database.html#option-b-docker-recommended",
-    "href": "database.html#option-b-docker-recommended",
-    "title": "5 · Database Setup",
-    "section": "",
-    "text": "macOS\nWindows\n\n\n\n\nbrew install --cask docker\nchoco install docker-desktop -y\n\n\n\nLaunch Docker Desktop once to finish post‑install steps.\n\n\n\n\n\n\nmacOS\nWindows\n\n\n\n\nbrew install --cask pgadmin4\nchoco install pgadmin4 -y\n\n\n\n\n\n\ncd ~/GitHub/AiTutor/Docker\ncp docker-compose.example.yml docker-compose.yml\nEdit docker-compose.yml:\nenvironment:\n  POSTGRES_PASSWORD: \"yourStrongPassword\"\n\n\n\ndocker-compose up -d\ndocker ps           # verify 'pedalogical-db' is healthy\nPorts (default):\n\n\n\nService\nHost Port\n\n\n\n\nPostgres\n5433\n\n\npgAdmin\n8080\n\n\n\n\n\n\n\n\nOpen http://localhost:8080\nAdd new server:\nHost : host.docker.internal (mac/Win)\nPort: 5433\n\n\n\n\n\n\n\n\nTip\n\n\n\nWhich method should I pick?\nDocker is disposable, reproducible, and keeps your host clean.\nNative is fine if you prefer brew services or need DB access when Docker isn’t running.\n\n\n\n\n\n\n\n\n\nNext Step\n\n\n\nRun EF Core Migrations."
-  },
-  {
-    "objectID": "migrations.html",
-    "href": "migrations.html",
-    "title": "6 · Entity Framework Migrations",
-    "section": "",
-    "text": "Entity Framework Core keeps the Postgres schema in sync with your C# models.\n\n\nRun once per environment:\ndotnet ef database update --project src/Pedalogical.Data\n\n\n\ndotnet ef migrations add &lt;Feature&gt;_&lt;DateUTC&gt;   --project src/Pedalogical.Data   --startup-project src/Pedalogical.Api\ndotnet ef database update --project src/Pedalogical.Data\n\n\n&lt;Verb&gt;&lt;Entity&gt;&lt;WhatChanged&gt;_&lt;yyyymmddHHMM&gt;\nExamples:\n\nAddStudentEmail_202507052130\nRenameCourseTable_20250710\n\n\n\n\n\ndotnet ef migrations remove --project src/Pedalogical.Data\n\n\n\ndotnet ef database update 202507052130 --project src/Pedalogical.Data\n\n\n\ndropdb pedalogical           # native\ncreatedb pedalogical\ndotnet ef database update\n\n\n\n\n\n\n\n\n\n\nIssue\nFix\n\n\n\n\nBuild failed\nEnsure the solution builds before running dotnet ef.\n\n\nNo migrations were applied\nYou already ran them — verify with select * from __EFMigrationsHistory;.\n\n\n\n\n🎉 You now have a fully functioning Pedalogical dev environment!"
-  },
-  {
-    "objectID": "migrations.html#initial-database-creation",
-    "href": "migrations.html#initial-database-creation",
-    "title": "6 · Entity Framework Migrations",
-    "section": "",
-    "text": "Run once per environment:\ndotnet ef database update --project src/Pedalogical.Data"
-  },
-  {
-    "objectID": "migrations.html#adding-a-migration-model-change",
-    "href": "migrations.html#adding-a-migration-model-change",
-    "title": "6 · Entity Framework Migrations",
-    "section": "",
-    "text": "dotnet ef migrations add &lt;Feature&gt;_&lt;DateUTC&gt;   --project src/Pedalogical.Data   --startup-project src/Pedalogical.Api\ndotnet ef database update --project src/Pedalogical.Data\n\n\n&lt;Verb&gt;&lt;Entity&gt;&lt;WhatChanged&gt;_&lt;yyyymmddHHMM&gt;\nExamples:\n\nAddStudentEmail_202507052130\nRenameCourseTable_20250710"
-  },
-  {
-    "objectID": "migrations.html#undo-the-last-migration",
-    "href": "migrations.html#undo-the-last-migration",
-    "title": "6 · Entity Framework Migrations",
-    "section": "",
-    "text": "dotnet ef migrations remove --project src/Pedalogical.Data"
-  },
-  {
-    "objectID": "migrations.html#migrate-to-a-specific-version",
-    "href": "migrations.html#migrate-to-a-specific-version",
-    "title": "6 · Entity Framework Migrations",
-    "section": "",
-    "text": "dotnet ef database update 202507052130 --project src/Pedalogical.Data"
-  },
-  {
-    "objectID": "migrations.html#refreshing-the-database-nuke-pave",
-    "href": "migrations.html#refreshing-the-database-nuke-pave",
-    "title": "6 · Entity Framework Migrations",
-    "section": "",
-    "text": "dropdb pedalogical           # native\ncreatedb pedalogical\ndotnet ef database update\n\n\n\n\n\n\n\n\n\n\nIssue\nFix\n\n\n\n\nBuild failed\nEnsure the solution builds before running dotnet ef.\n\n\nNo migrations were applied\nYou already ran them — verify with select * from __EFMigrationsHistory;.\n\n\n\n\n🎉 You now have a fully functioning Pedalogical dev environment!"
+    "text": "Run the app end‑to‑end to confirm the migration was successful.\nGuide → Run the App\nChecklist:\n\ndotnet build succeeds.\n\nEF Core migrations apply without errors.\n\nAPI starts at https://localhost:5001/swagger.\n\nFront‑end fetches sample data without 500s."
   },
   {
     "objectID": "dotnet-tools.html",
     "href": "dotnet-tools.html",
-    "title": "4 · . NET Development Environment",
+    "title": ".NET Tooling",
     "section": "",
-    "text": "We target .NET 9 LTS (preview until GA) and use Entity Framework Core 9 for data access.\n\n\n\n\n\nPlatform\nCommand\n\n\n\n\nmacOS\nbrew install --cask dotnet-sdk\n\n\nWindows\nchoco install dotnet-9.0-sdk -y\n\n\n\nVerify:\ndotnet --version   # 9.x.x\n\n\n\ndotnet tool install --global dotnet-ef\n# add to PATH on macOS\necho 'export PATH=\"$HOME/.dotnet/tools:$PATH\"' &gt;&gt; ~/.zprofile\n\n\n\n\n\n\nmacOS\nWindows\n\n\n\n\nbrew install --cask visual-studio-code\nchoco install vscode -y\n\n\n\nFrom VS Code Command Palette run:\nShell Command: Install 'code' command in PATH\n\n\ncode --install-extension ms-dotnettools.csdevkit\ncode --install-extension ms-dotnettools.csharp\ncode --install-extension jmrog.vscode-nuget-package-manager\ncode --install-extension ms-azuretools.vscode-docker\ncode --install-extension EditorConfig.EditorConfig\n\n\n\n\n\n\n\nNext Step\n\n\n\nChoose your preferred Database Setup path."
+    "text": "Set up a .NET 9 development environment for Pedalogical. This guide covers installing the .NET SDK, EF Core CLI, and Visual Studio Code with recommended extensions.\n\n\n\n\n\nPlatform\nCommand\n\n\n\n\nmacOS\nbrew install --cask dotnet-sdk\n\n\nWindows\nchoco install dotnet-9.0-sdk -y\n\n\n\nVerify:\ndotnet --version   # 9.x.x\n\n\n\ndotnet tool install --global dotnet-ef\n# add to PATH on macOS\necho 'export PATH=\"$HOME/.dotnet/tools:$PATH\"' &gt;&gt; ~/.zprofile\n\n\n\n\n\n\nmacOS\nWindows\n\n\n\n\nbrew install --cask visual-studio-code\nchoco install vscode -y\n\n\n\nFrom VS Code Command Palette run:\nShell Command: Install 'code' command in PATH\n\n\ncode --install-extension ms-dotnettools.csdevkit\ncode --install-extension ms-dotnettools.csharp\ncode --install-extension jmrog.vscode-nuget-package-manager\ncode --install-extension ms-azuretools.vscode-docker\ncode --install-extension EditorConfig.EditorConfig\n\n\n\n\n\n\n\nNext Step\n\n\n\nChoose your preferred Database Setup path."
   },
   {
     "objectID": "dotnet-tools.html#install-.net-sdk-9",
     "href": "dotnet-tools.html#install-.net-sdk-9",
-    "title": "4 · . NET Development Environment",
+    "title": ".NET Tooling",
     "section": "",
     "text": "Platform\nCommand\n\n\n\n\nmacOS\nbrew install --cask dotnet-sdk\n\n\nWindows\nchoco install dotnet-9.0-sdk -y\n\n\n\nVerify:\ndotnet --version   # 9.x.x"
   },
   {
     "objectID": "dotnet-tools.html#global-ef-core-cli",
     "href": "dotnet-tools.html#global-ef-core-cli",
-    "title": "4 · . NET Development Environment",
+    "title": ".NET Tooling",
     "section": "",
     "text": "dotnet tool install --global dotnet-ef\n# add to PATH on macOS\necho 'export PATH=\"$HOME/.dotnet/tools:$PATH\"' &gt;&gt; ~/.zprofile"
   },
   {
     "objectID": "dotnet-tools.html#visual-studio-code",
     "href": "dotnet-tools.html#visual-studio-code",
-    "title": "4 · . NET Development Environment",
+    "title": ".NET Tooling",
     "section": "",
     "text": "macOS\nWindows\n\n\n\n\nbrew install --cask visual-studio-code\nchoco install vscode -y\n\n\n\nFrom VS Code Command Palette run:\nShell Command: Install 'code' command in PATH\n\n\ncode --install-extension ms-dotnettools.csdevkit\ncode --install-extension ms-dotnettools.csharp\ncode --install-extension jmrog.vscode-nuget-package-manager\ncode --install-extension ms-azuretools.vscode-docker\ncode --install-extension EditorConfig.EditorConfig\n\n\n\n\n\n\n\nNext Step\n\n\n\nChoose your preferred Database Setup path."
   },
   {
+    "objectID": "db-migrations.html",
+    "href": "db-migrations.html",
+    "title": "Database Migrations",
+    "section": "",
+    "text": "This guide covers how to manage database migrations, which are used to evolve the database schema as your C# models change.\n\n\nFrom the root of the repository, run:\ndotnet ef database update \n\n\n\ndotnet ef migrations add &lt;Feature&gt;\ndotnet ef database update\n\n\n&lt;Verb&gt;&lt;Entity&gt;&lt;WhatChanged&gt;\nExamples:\n\nAddStudentEmail\nRenameCourseTable\n\n\n\n\n\ndotnet ef migrations remove \n\n\n\ndotnet ef database update &lt;MigrationName&gt;\n\n\n\ndropdb pedalogical           # native\ncreatedb pedalogical\ndotnet ef database update\n\n\n\n\n\n\n\n\n\n\nIssue\nFix\n\n\n\n\nBuild failed\nEnsure the solution builds before running dotnet ef.\n\n\nNo migrations were applied\nYou already ran them — verify with select * from __EFMigrationsHistory;.\n\n\n\n\n🎉 You now have a fully functioning Pedalogical dev environment!"
+  },
+  {
+    "objectID": "db-migrations.html#initial-database-creation",
+    "href": "db-migrations.html#initial-database-creation",
+    "title": "Database Migrations",
+    "section": "",
+    "text": "From the root of the repository, run:\ndotnet ef database update"
+  },
+  {
+    "objectID": "db-migrations.html#adding-a-migration-model-change",
+    "href": "db-migrations.html#adding-a-migration-model-change",
+    "title": "Database Migrations",
+    "section": "",
+    "text": "dotnet ef migrations add &lt;Feature&gt;\ndotnet ef database update\n\n\n&lt;Verb&gt;&lt;Entity&gt;&lt;WhatChanged&gt;\nExamples:\n\nAddStudentEmail\nRenameCourseTable"
+  },
+  {
+    "objectID": "db-migrations.html#undo-the-last-migration",
+    "href": "db-migrations.html#undo-the-last-migration",
+    "title": "Database Migrations",
+    "section": "",
+    "text": "dotnet ef migrations remove"
+  },
+  {
+    "objectID": "db-migrations.html#migrate-to-a-specific-version",
+    "href": "db-migrations.html#migrate-to-a-specific-version",
+    "title": "Database Migrations",
+    "section": "",
+    "text": "dotnet ef database update &lt;MigrationName&gt;"
+  },
+  {
+    "objectID": "db-migrations.html#refreshing-the-database-nuke-pave",
+    "href": "db-migrations.html#refreshing-the-database-nuke-pave",
+    "title": "Database Migrations",
+    "section": "",
+    "text": "dropdb pedalogical           # native\ncreatedb pedalogical\ndotnet ef database update\n\n\n\n\n\n\n\n\n\n\nIssue\nFix\n\n\n\n\nBuild failed\nEnsure the solution builds before running dotnet ef.\n\n\nNo migrations were applied\nYou already ran them — verify with select * from __EFMigrationsHistory;.\n\n\n\n\n🎉 You now have a fully functioning Pedalogical dev environment!"
+  },
+  {
+    "objectID": "database.html",
+    "href": "database.html",
+    "title": "Database Setup",
+    "section": "",
+    "text": "Pedalogical uses PostgreSQL 17. Choose between a native install or Docker container.\n\n\n\n\n\n\nTip\n\n\n\nWhich method should I pick?\nDocker is disposable, reproducible, and keeps your host clean.\nNative is fine if you prefer brew services or need DB access when Docker isn’t running.\n\n\n\n\n\n\nbrew install postgresql@17\nbrew services start postgresql@17          # auto‑starts at login\nbrew install --cask pgadmin4          \nDefault data directory ➜ /opt/homebrew/var/postgresql@17\n\n\n\nchoco install postgresql17 -y\n# Accept installer prompts and set the superuser password\npgAdmin is offered in the EnterpriseDB installer, or install via Chocolatey:\nchoco install pgadmin4 -y\n\n\n\n\n\n\n\n\n\n\nmacOS\nWindows\n\n\n\n\nbrew install --cask docker\nchoco install docker-desktop -y\n\n\n\nLaunch Docker Desktop once to finish post‑install steps.\n\n\n\n\n\n\nmacOS\nWindows\n\n\n\n\nbrew install --cask pgadmin4\nchoco install pgadmin4 -y\n\n\n\n\n\n\nMake a copy of the example docker-compose.yml file:\ncd ~/GitHub/AiTutor/Docker\ncp docker-compose.example.yml docker-compose.yml\nEdit docker-compose.yml and set the Postgres superuser password (obtain from Team Notion):\nenvironment:\n  POSTGRES_PASSWORD: \"Password\"\n\n\n\ndocker-compose up -d\ndocker ps           # verify 'pedalogical-db' is healthy\nPorts (default):\n\n\n\nService\nHost Port\n\n\n\n\nPostgres\n5433\n\n\npgAdmin\n8080\n\n\n\n\n\n\n\n\nOpen http://localhost:8080\nAdd new server:\nHost : host.docker.internal (mac/Win)\nPort: 5433\n\n\n\n\n\n\n\n\nNext Step\n\n\n\nRun the App."
+  },
+  {
+    "objectID": "database.html#option-a-native-install",
+    "href": "database.html#option-a-native-install",
+    "title": "Database Setup",
+    "section": "",
+    "text": "brew install postgresql@17\nbrew services start postgresql@17          # auto‑starts at login\nbrew install --cask pgadmin4          \nDefault data directory ➜ /opt/homebrew/var/postgresql@17\n\n\n\nchoco install postgresql17 -y\n# Accept installer prompts and set the superuser password\npgAdmin is offered in the EnterpriseDB installer, or install via Chocolatey:\nchoco install pgadmin4 -y"
+  },
+  {
+    "objectID": "database.html#option-b-docker-recommended",
+    "href": "database.html#option-b-docker-recommended",
+    "title": "Database Setup",
+    "section": "",
+    "text": "macOS\nWindows\n\n\n\n\nbrew install --cask docker\nchoco install docker-desktop -y\n\n\n\nLaunch Docker Desktop once to finish post‑install steps.\n\n\n\n\n\n\nmacOS\nWindows\n\n\n\n\nbrew install --cask pgadmin4\nchoco install pgadmin4 -y\n\n\n\n\n\n\nMake a copy of the example docker-compose.yml file:\ncd ~/GitHub/AiTutor/Docker\ncp docker-compose.example.yml docker-compose.yml\nEdit docker-compose.yml and set the Postgres superuser password (obtain from Team Notion):\nenvironment:\n  POSTGRES_PASSWORD: \"Password\"\n\n\n\ndocker-compose up -d\ndocker ps           # verify 'pedalogical-db' is healthy\nPorts (default):\n\n\n\nService\nHost Port\n\n\n\n\nPostgres\n5433\n\n\npgAdmin\n8080\n\n\n\n\n\n\n\n\nOpen http://localhost:8080\nAdd new server:\nHost : host.docker.internal (mac/Win)\nPort: 5433\n\n\n\n\n\n\n\n\nNext Step\n\n\n\nRun the App."
+  },
+  {
+    "objectID": "git-clone.html",
+    "href": "git-clone.html",
+    "title": "Git & Clone",
+    "section": "",
+    "text": "Install Git and clone the Pedalogical repository to your local machine.\n\n\n\n\n\nPlatform\nInstall\nVerify\n\n\n\n\nmacOS\nbrew install git\ngit --version\n\n\nWindows\nchoco install git -y\ngit --version\n\n\n\n\nIf macOS prompts for Xcode Command‑Line Tools, accept the install — Homebrew relies on them.\n\n\n\n\nssh-keygen -t ed25519 -C \"you@willamette.edu\"\npbcopy &lt; ~/.ssh/id_ed25519.pub   # macOS\ncat ~/.ssh/id_ed25519.pub        # Windows Git Bash\nAdd the key to your GitHub account (Settings → SSH Keys).\n\n\n\nWe keep all project repos in ~/GitHub for consistency.\ncd ~\nmkdir -p GitHub && cd GitHub\ngit clone git@github.com:wu-software-lab/AiTutor.git   # SSH\n# or\ngit clone https://github.com/wu-software-lab/AiTutor.git  # HTTPS\ncd AiTutor\ngit status\n\n\ngit remote add upstream https://github.com/wu-software-lab/AiTutor.git\ngit pull upstream main\n\n\n\n\n\n\n\nNext Step\n\n\n\nConfigure your Environment Variables."
+  },
+  {
+    "objectID": "git-clone.html#install-git",
+    "href": "git-clone.html#install-git",
+    "title": "Git & Clone",
+    "section": "",
+    "text": "Platform\nInstall\nVerify\n\n\n\n\nmacOS\nbrew install git\ngit --version\n\n\nWindows\nchoco install git -y\ngit --version\n\n\n\n\nIf macOS prompts for Xcode Command‑Line Tools, accept the install — Homebrew relies on them."
+  },
+  {
+    "objectID": "git-clone.html#generate-an-ssh-key-optional",
+    "href": "git-clone.html#generate-an-ssh-key-optional",
+    "title": "Git & Clone",
+    "section": "",
+    "text": "ssh-keygen -t ed25519 -C \"you@willamette.edu\"\npbcopy &lt; ~/.ssh/id_ed25519.pub   # macOS\ncat ~/.ssh/id_ed25519.pub        # Windows Git Bash\nAdd the key to your GitHub account (Settings → SSH Keys)."
+  },
+  {
+    "objectID": "git-clone.html#clone-pedalogical",
+    "href": "git-clone.html#clone-pedalogical",
+    "title": "Git & Clone",
+    "section": "",
+    "text": "We keep all project repos in ~/GitHub for consistency.\ncd ~\nmkdir -p GitHub && cd GitHub\ngit clone git@github.com:wu-software-lab/AiTutor.git   # SSH\n# or\ngit clone https://github.com/wu-software-lab/AiTutor.git  # HTTPS\ncd AiTutor\ngit status\n\n\ngit remote add upstream https://github.com/wu-software-lab/AiTutor.git\ngit pull upstream main\n\n\n\n\n\n\n\nNext Step\n\n\n\nConfigure your Environment Variables."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "Pedalogical Developer On‑Ramp 🚀\nWelcome to the Pedalogical Developer Docs — your single source of truth for getting a local development environment up and running in less than 30 minutes (coffee not included ☕).\nWhether you are:\n\nTotally new to the project and need everything installed,\n\nMigrating from our former SQL Server stack, or\n\nReturning after a hiatus and just need a refresher,\n\n\nPro Tip\nKeep a terminal open next to these docs and copy‑paste as you go. Most commands are idempotent — if you run them twice nothing breaks."
+  },
+  {
     "objectID": "env-vars.html",
     "href": "env-vars.html",
-    "title": "3 · Environment Variables",
+    "title": "Environment Variables",
     "section": "",
-    "text": "The application loads configuration from a dotenv file so secrets never reach source control.\n\n\ncd ~/GitHub/AiTutor\ncp .env.example .env\n\n\n\n\n\n\n\n\n\n\n\nKey\nDescription\nWhere to Find\n\n\n\n\nPOSTGRES_PASSWORD\nPassword for local/Docker Postgres superuser\nChoose your own\n\n\nOPENAI_API_KEY\nNeeded for AI features\nNotion → Secrets\n\n\nAZURE_STORAGE_KEY\nMedia uploads\nNotion → Secrets\n\n\n\nOpen .env in your editor:\ncode .env\nAny value left blank will cause the app to fail fast with a descriptive error.\n\n\n\nValues are read at application startup. Restart the dev server after edits.\n\n\n\n\n\n\n\nNext Step\n\n\n\nInstall .NET Tooling."
+    "text": "The application loads configuration from a dotenv file so secrets never reach source control.\n\n\ncd ~/GitHub/AiTutor\ncp .env.example .env\ncd ~/GitHub/AiTutor\ncp .env.example .env\n\n\n\n\n\n\n\n\n\n\n\nKey\nDescription\nWhere to Find\n\n\n\n\nPOSTGRES_PASSWORD\nPassword for local/Docker Postgres\nNotion → Secrets\n\n\nOPENAI_API_KEY\nNeeded for AI features\nNotion → Secrets\n\n\nSENDGRID_API_KEY\nFor sending emails\nNotion → Secrets\n\n\nSONARQUBE_API_KEY\nFor Code quality checks\nNotion → Secrets\n\n\n\nOpen .env in your editor:\ncode .env\nAny value left blank will cause the app to fail fast with a descriptive error.\n\n\n\nValues are read at application startup. Restart the dev server after edits.\n\n\n\n\n\n\n\nNext Step\n\n\n\nInstall .NET Tooling."
   },
   {
     "objectID": "env-vars.html#create-your-.env",
     "href": "env-vars.html#create-your-.env",
-    "title": "3 · Environment Variables",
+    "title": "Environment Variables",
     "section": "",
-    "text": "cd ~/GitHub/AiTutor\ncp .env.example .env"
+    "text": "cd ~/GitHub/AiTutor\ncp .env.example .env\ncd ~/GitHub/AiTutor\ncp .env.example .env"
   },
   {
     "objectID": "env-vars.html#fill-required-keys",
     "href": "env-vars.html#fill-required-keys",
-    "title": "3 · Environment Variables",
+    "title": "Environment Variables",
     "section": "",
-    "text": "Key\nDescription\nWhere to Find\n\n\n\n\nPOSTGRES_PASSWORD\nPassword for local/Docker Postgres superuser\nChoose your own\n\n\nOPENAI_API_KEY\nNeeded for AI features\nNotion → Secrets\n\n\nAZURE_STORAGE_KEY\nMedia uploads\nNotion → Secrets\n\n\n\nOpen .env in your editor:\ncode .env\nAny value left blank will cause the app to fail fast with a descriptive error."
+    "text": "Key\nDescription\nWhere to Find\n\n\n\n\nPOSTGRES_PASSWORD\nPassword for local/Docker Postgres\nNotion → Secrets\n\n\nOPENAI_API_KEY\nNeeded for AI features\nNotion → Secrets\n\n\nSENDGRID_API_KEY\nFor sending emails\nNotion → Secrets\n\n\nSONARQUBE_API_KEY\nFor Code quality checks\nNotion → Secrets\n\n\n\nOpen .env in your editor:\ncode .env\nAny value left blank will cause the app to fail fast with a descriptive error."
   },
   {
     "objectID": "env-vars.html#reloading-changes",
     "href": "env-vars.html#reloading-changes",
-    "title": "3 · Environment Variables",
+    "title": "Environment Variables",
     "section": "",
     "text": "Values are read at application startup. Restart the dev server after edits.\n\n\n\n\n\n\n\nNext Step\n\n\n\nInstall .NET Tooling."
+  },
+  {
+    "objectID": "run-app.html",
+    "href": "run-app.html",
+    "title": "First App Run",
+    "section": "",
+    "text": "Run the app to create the database and seed initial data.\n\n\nFrom the root of the repository, run:\ndotnet ef database update\n\n\n\nYou can check the database using your preferred PostgreSQL client (e.g., pgAdmin, BeeHive, or command line). Look for the pedalogical database and verify that the initial tables and data are present.\nTo verify via command line, you can run:\npsql -U postgres -d pedalogical -c \"\\dt\"\nYou should see tables like AspNetUsers, AspNetRoles, and others that were seeded during the initial run.\n\n\n\nRun the application to create the initial data:\ndotnet run\n\n\n\nOpen your browser and navigate to http://localhost:5000 to access the application.\n\n\n\n\nClick on the “Register” link.\nFill out the registration form and submit it.\nCheck your email for a confirmation link (it might be in your spam folder).\nLog in with the new account.\n\n\n\n\n\n\n\n\n\n\n\nIssue\nFix\n\n\n\n\nDatabase connection error\nEnsure your .env file has the correct POSTGRES_PASSWORD and that the database is running.\n\n\nApplication not starting\nCheck the console output for errors, ensure all dependencies are installed, and that the database is initialized.\n\n\nEmail not sending\nVerify you are connected to the internet and check your spam folder."
+  },
+  {
+    "objectID": "run-app.html#initialize-the-database.",
+    "href": "run-app.html#initialize-the-database.",
+    "title": "First App Run",
+    "section": "",
+    "text": "From the root of the repository, run:\ndotnet ef database update"
+  },
+  {
+    "objectID": "run-app.html#verify-the-database-is-created-and-seeded",
+    "href": "run-app.html#verify-the-database-is-created-and-seeded",
+    "title": "First App Run",
+    "section": "",
+    "text": "You can check the database using your preferred PostgreSQL client (e.g., pgAdmin, BeeHive, or command line). Look for the pedalogical database and verify that the initial tables and data are present.\nTo verify via command line, you can run:\npsql -U postgres -d pedalogical -c \"\\dt\"\nYou should see tables like AspNetUsers, AspNetRoles, and others that were seeded during the initial run."
+  },
+  {
+    "objectID": "run-app.html#run-the-application",
+    "href": "run-app.html#run-the-application",
+    "title": "First App Run",
+    "section": "",
+    "text": "Run the application to create the initial data:\ndotnet run"
+  },
+  {
+    "objectID": "run-app.html#access-the-app",
+    "href": "run-app.html#access-the-app",
+    "title": "First App Run",
+    "section": "",
+    "text": "Open your browser and navigate to http://localhost:5000 to access the application."
+  },
+  {
+    "objectID": "run-app.html#verify-that-you-can-create-a-new-account",
+    "href": "run-app.html#verify-that-you-can-create-a-new-account",
+    "title": "First App Run",
+    "section": "",
+    "text": "Click on the “Register” link.\nFill out the registration form and submit it.\nCheck your email for a confirmation link (it might be in your spam folder).\nLog in with the new account."
+  },
+  {
+    "objectID": "run-app.html#troubleshooting",
+    "href": "run-app.html#troubleshooting",
+    "title": "First App Run",
+    "section": "",
+    "text": "Issue\nFix\n\n\n\n\nDatabase connection error\nEnsure your .env file has the correct POSTGRES_PASSWORD and that the database is running.\n\n\nApplication not starting\nCheck the console output for errors, ensure all dependencies are installed, and that the database is initialized.\n\n\nEmail not sending\nVerify you are connected to the internet and check your spam folder."
   }
 ]

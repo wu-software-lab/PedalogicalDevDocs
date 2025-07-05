@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp;·&nbsp;Git &amp; Clone – Pedalogical Developer Docs</title>
+<title>Git &amp; Clone – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -291,32 +291,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="./new-dev-setup.html"> 
+<span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./package-managers.html"> 
-<span class="menu-text">Package&nbsp;Managers</span></a>
+    <a class="nav-link" href="./migration.html"> 
+<span class="menu-text">DB Migration</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./git-clone.html" aria-current="page"> 
-<span class="menu-text">Git&nbsp;&amp;&nbsp;Clone</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./env-vars.html"> 
-<span class="menu-text">Environment&nbsp;Variables</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./dotnet-tools.html"> 
-<span class="menu-text">.&nbsp;NET&nbsp;Tooling</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./database.html"> 
-<span class="menu-text">Database&nbsp;Setup</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./migrations.html"> 
-<span class="menu-text">EF&nbsp;Migrations</span></a>
+    <span class="nav-link">
+<span class="menu-text">Conventions (TBD)</span>
+    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -334,13 +319,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#install-git-clone-the-repository" id="toc-install-git-clone-the-repository" class="nav-link active" data-scroll-target="#install-git-clone-the-repository">2&nbsp;·&nbsp;Install Git &amp; Clone the Repository</a>
+  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
   <ul class="collapse">
-  <li><a href="#install-git" id="toc-install-git" class="nav-link" data-scroll-target="#install-git">2.1&nbsp;Install Git</a></li>
-  <li><a href="#generate-an-ssh-key-optional" id="toc-generate-an-ssh-key-optional" class="nav-link" data-scroll-target="#generate-an-ssh-key-optional">2.2&nbsp;Generate an SSH key <em>(Optional)</em></a></li>
-  <li><a href="#clone-pedalogical" id="toc-clone-pedalogical" class="nav-link" data-scroll-target="#clone-pedalogical">2.3&nbsp;Clone Pedalogical</a>
+  <li><a href="#install-git" id="toc-install-git" class="nav-link" data-scroll-target="#install-git">1. Install Git</a></li>
+  <li><a href="#generate-an-ssh-key-optional" id="toc-generate-an-ssh-key-optional" class="nav-link" data-scroll-target="#generate-an-ssh-key-optional">2. Generate an SSH key <em>(Optional)</em></a></li>
+  <li><a href="#clone-pedalogical" id="toc-clone-pedalogical" class="nav-link" data-scroll-target="#clone-pedalogical">3. Clone Pedalogical</a>
   <ul class="collapse">
-  <li><a href="#keeping-your-fork-uptodate" id="toc-keeping-your-fork-uptodate" class="nav-link" data-scroll-target="#keeping-your-fork-uptodate">Keeping your fork up‑to‑date</a></li>
+  <li><a href="#keeping-your-fork-uptodate" id="toc-keeping-your-fork-uptodate" class="nav-link" data-scroll-target="#keeping-your-fork-uptodate">4. Keeping your fork up‑to‑date</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -356,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">2&nbsp;·&nbsp;Git &amp; Clone</h1>
+<h1 class="title">Git &amp; Clone</h1>
 </div>
 
 
@@ -373,10 +358,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="install-git-clone-the-repository" class="level1">
-<h1>2&nbsp;·&nbsp;Install Git &amp; Clone the Repository</h1>
+<section id="tldr" class="level1">
+<h1>TL;DR</h1>
+<p>Install <strong>Git</strong> and clone the <strong>Pedalogical</strong> repository to your local machine.</p>
 <section id="install-git" class="level2">
-<h2 class="anchored" data-anchor-id="install-git">2.1&nbsp;Install Git</h2>
+<h2 class="anchored" data-anchor-id="install-git">1. Install Git</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -403,14 +389,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 </section>
 <section id="generate-an-ssh-key-optional" class="level2">
-<h2 class="anchored" data-anchor-id="generate-an-ssh-key-optional">2.2&nbsp;Generate an SSH key <em>(Optional)</em></h2>
+<h2 class="anchored" data-anchor-id="generate-an-ssh-key-optional">2. Generate an SSH key <em>(Optional)</em></h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"you@willamette.edu"</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pbcopy</span> <span class="op">&lt;</span> ~/.ssh/id_ed25519.pub   <span class="co"># macOS</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519.pub        <span class="co"># Windows Git&nbsp;Bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Add the key to your GitHub account (Settings → SSH&nbsp;Keys).</p>
 </section>
 <section id="clone-pedalogical" class="level2">
-<h2 class="anchored" data-anchor-id="clone-pedalogical">2.3&nbsp;Clone Pedalogical</h2>
+<h2 class="anchored" data-anchor-id="clone-pedalogical">3. Clone Pedalogical</h2>
 <p>We keep all project repos in <code>~/GitHub</code> for consistency.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> GitHub <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> GitHub</span>
@@ -420,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> AiTutor</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="keeping-your-fork-uptodate" class="level3">
-<h3 class="anchored" data-anchor-id="keeping-your-fork-uptodate">Keeping your fork up‑to‑date</h3>
+<h3 class="anchored" data-anchor-id="keeping-your-fork-uptodate">4. Keeping your fork up‑to‑date</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream https://github.com/wu-software-lab/AiTutor.git</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull upstream main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
@@ -529,7 +515,7 @@ Next&nbsp;Step
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/wu-software-lab\.github\.io\/PedalogicalDevDocs\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

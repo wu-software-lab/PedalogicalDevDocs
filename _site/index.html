@@ -256,32 +256,17 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="./new-dev-setup.html"> 
+<span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./package-managers.html"> 
-<span class="menu-text">Package&nbsp;Managers</span></a>
+    <a class="nav-link" href="./migration.html"> 
+<span class="menu-text">DB Migration</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./git-clone.html"> 
-<span class="menu-text">Git&nbsp;&amp;&nbsp;Clone</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./env-vars.html"> 
-<span class="menu-text">Environment&nbsp;Variables</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./dotnet-tools.html"> 
-<span class="menu-text">.&nbsp;NET&nbsp;Tooling</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./database.html"> 
-<span class="menu-text">Database&nbsp;Setup</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./migrations.html"> 
-<span class="menu-text">EF&nbsp;Migrations</span></a>
+    <span class="nav-link">
+<span class="menu-text">Conventions (TBD)</span>
+    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -341,12 +326,10 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li><strong>Returning</strong> after a hiatus and just need a refresher,</li>
 </ul>
-<p>start at the top‑left <strong>sidebar</strong> and work downward. Every page ends with a&nbsp;<em>Next&nbsp;Step</em> link so you can cruise hands‑free.</p>
 <blockquote class="blockquote">
 <p><strong>Pro Tip</strong><br>
 Keep a terminal open next to these docs and copy‑paste as you go. Most commands are idempotent — if you run them twice nothing breaks.</p>
 </blockquote>
-<p>If you hit a snag jump to <strong>Troubleshooting</strong> at the bottom of each page or post in the <code>#dev‑help</code> Discord channel.</p>
 
 
 </section>
@@ -437,7 +420,7 @@ Keep a terminal open next to these docs and copy‑paste as you go. Most command
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/wu-software-lab\.github\.io\/PedalogicalDevDocs\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

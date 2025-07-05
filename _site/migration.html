@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Package Managers – Pedalogical Developer Docs</title>
+<title>Migration Guide for Existing Developers – Pedalogical Developer Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">New Dev Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./migration.html"> 
+    <a class="nav-link active" href="./migration.html" aria-current="page"> 
 <span class="menu-text">DB Migration</span></a>
   </li>  
   <li class="nav-item">
@@ -319,16 +319,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a>
+  <li><a href="#migration-guide-existing-devs" id="toc-migration-guide-existing-devs" class="nav-link active" data-scroll-target="#migration-guide-existing-devs">🔄 Migration Guide (Existing Devs)</a>
   <ul class="collapse">
-  <li><a href="#macos-homebrew" id="toc-macos-homebrew" class="nav-link" data-scroll-target="#macos-homebrew">macOS&nbsp;–&nbsp;Homebrew 🍺</a>
-  <ul class="collapse">
-  <li><a href="#keeping-brew-uptodate" id="toc-keeping-brew-uptodate" class="nav-link" data-scroll-target="#keeping-brew-uptodate">Keeping Brew up‑to‑date</a></li>
-  </ul></li>
-  <li><a href="#windows-chocolatey" id="toc-windows-chocolatey" class="nav-link" data-scroll-target="#windows-chocolatey">Windows&nbsp;–&nbsp;Chocolatey 🍫</a></li>
+  <li><a href="#move-secrets-to-.env" id="toc-move-secrets-to-.env" class="nav-link" data-scroll-target="#move-secrets-to-.env">1&nbsp;·&nbsp;Move Secrets to <code>.env</code></a></li>
+  <li><a href="#switch-from-sql-server-postgresql-17" id="toc-switch-from-sql-server-postgresql-17" class="nav-link" data-scroll-target="#switch-from-sql-server-postgresql-17">2&nbsp;·&nbsp;Switch from SQL&nbsp;Server&nbsp;→&nbsp;PostgreSQL&nbsp;17</a></li>
+  <li><a href="#smoketest-the-application" id="toc-smoketest-the-application" class="nav-link" data-scroll-target="#smoketest-the-application">3&nbsp;·&nbsp;Smoke‑Test the Application</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/package-managers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/migration.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -340,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Package Managers</h1>
+<h1 class="title">Migration Guide for Existing Developers</h1>
 </div>
 
 
@@ -357,46 +355,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="tldr" class="level1">
-<h1>TL;DR</h1>
-<p>We strongly recommend installing all tooling through a package manager — it keeps dependencies <strong>repeatable</strong> and <strong>easy to upgrade</strong>.</p>
-<section id="macos-homebrew" class="level2">
-<h2 class="anchored" data-anchor-id="macos-homebrew">macOS&nbsp;–&nbsp;Homebrew 🍺</h2>
-<p>Homebrew installs under <code>/opt/homebrew</code> (Apple&nbsp;Silicon) or <code>/usr/local</code> (Intel).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">"</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(/opt/homebrew/bin/brew shellenv)"'</span> <span class="op">&gt;&gt;</span> ~/.zprofile   <span class="co"># Apple&nbsp;Silicon</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> doctor          <span class="co"># Verify install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="keeping-brew-uptodate" class="level3">
-<h3 class="anchored" data-anchor-id="keeping-brew-uptodate">Keeping Brew up‑to‑date</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> update          <span class="co"># refresh formulas</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> upgrade         <span class="co"># upgrade all packages</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="windows-chocolatey" class="level2">
-<h2 class="anchored" data-anchor-id="windows-chocolatey">Windows&nbsp;–&nbsp;Chocolatey 🍫</h2>
-<p>Chocolatey installs to <code>C:\ProgramData\chocolatey</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-ExecutionPolicy</span> Bypass <span class="op">-</span>Scope <span class="cf">Process</span> <span class="op">-</span>Force</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>System<span class="op">.</span><span class="fu">Net</span><span class="op">.</span><span class="fu">ServicePointManager</span><span class="op">]::</span>SecurityProtocol <span class="op">=</span> <span class="dv">3072</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">iex</span> <span class="op">((</span><span class="fu">New-Object</span> System<span class="op">.</span><span class="fu">Net</span><span class="op">.</span><span class="fu">WebClient</span><span class="op">).</span><span class="fu">DownloadString</span><span class="op">(</span><span class="st">'https://community.chocolatey.org/install.ps1'</span><span class="op">))</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>choco upgrade chocolatey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="migration-guide-existing-devs" class="level1">
+<h1>🔄 Migration Guide (Existing Devs)</h1>
+<p>This page walks long‑time Pedalogical contributors through the key changes needed to align with our <strong>current tech stack</strong>.</p>
+<hr>
+<section id="move-secrets-to-.env" class="level2">
+<h2 class="anchored" data-anchor-id="move-secrets-to-.env">1&nbsp;·&nbsp;Move Secrets to <code>.env</code></h2>
+<p>We no longer store connection strings or API keys in <code>appsettings.Development.json</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> .env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
-<p><strong>Why not Winget?</strong><br>
-Chocolatey covers everything we need <em>and</em> works on Server&nbsp;2022 machines used in CI.</p>
+<p>Populate <code>POSTGRES_PASSWORD</code>, <code>OPENAI_API_KEY</code>, and any other keys shown in the template.</p>
+</blockquote>
+<p><em>See full instructions →</em> <a href="./env-vars.html">Environment&nbsp;Variables</a></p>
+<hr>
+</section>
+<section id="switch-from-sql-server-postgresql-17" class="level2">
+<h2 class="anchored" data-anchor-id="switch-from-sql-server-postgresql-17">2&nbsp;·&nbsp;Switch from SQL&nbsp;Server&nbsp;→&nbsp;PostgreSQL&nbsp;17</h2>
+<p>Local development now uses PostgreSQL.<br>
+Follow either the native install or Docker‑Compose option.</p>
+<p><em>See full instructions →</em> <a href="./database.html">Database&nbsp;Setup</a></p>
+<blockquote class="blockquote">
+<p>After switching engines, apply EF&nbsp;Core migrations before running the app.</p>
 </blockquote>
 <hr>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Next&nbsp;Step
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Head to <a href="./git-clone.html"><strong>Git&nbsp;&amp;&nbsp;Clone</strong></a> to install Git and pull the codebase.</p>
-</div>
-</div>
+</section>
+<section id="smoketest-the-application" class="level2">
+<h2 class="anchored" data-anchor-id="smoketest-the-application">3&nbsp;·&nbsp;Smoke‑Test the Application</h2>
+<p>Run the app end‑to‑end to confirm the migration was successful.</p>
+<p><em>Guide →</em> <a href="./run-app.html">Run&nbsp;the&nbsp;App</a></p>
+<p>Checklist:</p>
+<ol type="1">
+<li><code>dotnet build</code> succeeds.<br>
+</li>
+<li>EF&nbsp;Core migrations apply without errors.<br>
+</li>
+<li>API starts at <code>https://localhost:5001/swagger</code>.<br>
+</li>
+<li>Front‑end fetches sample data without 500s.</li>
+</ol>
 
 
 </section>
@@ -820,4 +817,4 @@ Next&nbsp;Step
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/package-managers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wu-software-lab/AiTutor/edit/main/migration.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wu-software-lab/AiTutor/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

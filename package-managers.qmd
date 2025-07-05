@@ -1,9 +1,9 @@
 ---
-title: "1 · Package Managers"
+title: "Package Managers"
 format: html
 ---
 
-# 1 · Package Managers
+# TL;DR
 
 We strongly recommend installing all tooling through a package manager — it keeps dependencies **repeatable** and **easy to upgrade**.
 

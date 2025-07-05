@@ -1,13 +1,19 @@
 ---
-title: "5 · Database Setup"
+title: "Database Setup"
 format: html
 ---
 
-# 5 · Database Setup
+# TL;DR
+Pedalogical uses **PostgreSQL 17**. Choose between a native install or Docker
+container.
 
-Pedalogical uses **PostgreSQL 17**. Pick **one** of the two methods below.
+::: {.callout-tip}
+**Which method should I pick?**
 
----
+*Docker* is disposable, reproducible, and keeps your host clean.  
+*Native* is fine if you prefer `brew services` or need DB access when Docker isn’t running.
+:::
+
 
 ## Option A — Native Install
 
@@ -16,6 +22,7 @@ Pedalogical uses **PostgreSQL 17**. Pick **one** of the two methods below.
 ```bash
 brew install postgresql@17
 brew services start postgresql@17          # auto‑starts at login
+brew install --cask pgadmin4          
 ```
 
 Default data directory ➜ `/opt/homebrew/var/postgresql@17`
@@ -53,16 +60,18 @@ Launch Docker Desktop once to finish post‑install steps.
 
 ### 3. Configure Compose
 
+Make a copy of the example `docker-compose.yml` file:
+
 ```bash
 cd ~/GitHub/AiTutor/Docker
 cp docker-compose.example.yml docker-compose.yml
 ```
 
-Edit `docker-compose.yml`:
+Edit `docker-compose.yml` and set the Postgres superuser password (obtain from Team Notion):
 
 ```yaml
 environment:
-  POSTGRES_PASSWORD: "yourStrongPassword"
+  POSTGRES_PASSWORD: "Password"
 ```
 
 ### 4. Start Services
@@ -90,16 +99,7 @@ Ports (default):
 
 ---
 
-::: {.callout-tip}
-**Which method should I pick?**
-
-*Docker* is disposable, reproducible, and keeps your host clean.  
-*Native* is fine if you prefer `brew services` or need DB access when Docker isn’t running.
-:::
-
----
-
 ::: {.callout-note}
 ### Next Step  
-Run [**EF Core Migrations**](migrations.qmd).
+Run the [**App**](run-app.qmd).
 :::

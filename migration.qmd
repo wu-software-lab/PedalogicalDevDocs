@@ -1,0 +1,49 @@
+---
+title: "Migration Guide for Existing Developers"
+format: html
+---
+
+# 🔄 Migration Guide (Existing Devs)
+
+This page walks long‑time Pedalogical contributors through the key changes needed to align with our **current tech stack**.
+
+---
+
+## 1 · Move Secrets to `.env`
+
+We no longer store connection strings or API keys in `appsettings.json`.
+
+```bash
+cp .env.example .env
+code .env
+```
+
+> Populate `POSTGRES_PASSWORD`, `OPENAI_API_KEY`, and any other keys shown in the template.
+
+*See full instructions →* [Environment Variables](env-vars.qmd)
+
+---
+
+## 2 · Switch from SQL Server → PostgreSQL 17
+
+Local development now uses PostgreSQL.  
+Follow either the native install or Docker‑Compose option.
+
+*See full instructions →* [Database Setup](database.qmd)
+
+> After switching engines, apply EF Core migrations before running the app.
+
+---
+
+## 3 · Smoke‑Test the Application
+
+Run the app end‑to‑end to confirm the migration was successful.
+
+*Guide →* [Run the App](run-app.qmd)
+
+Checklist:
+
+1. `dotnet build` succeeds.  
+2. EF Core migrations apply without errors.  
+3. API starts at `https://localhost:5001/swagger`.  
+4. Front‑end fetches sample data without 500s.
