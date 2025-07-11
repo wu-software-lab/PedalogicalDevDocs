@@ -388,9 +388,9 @@ Follow either the native install or Docker‑Compose option.</p>
 <ol type="1">
 <li><code>dotnet build</code> succeeds.<br>
 </li>
-<li>EF&nbsp;Core migrations apply without errors.<br>
+<li>EF&nbsp;Core migrations apply without errors <code>dotnet ef database update</code>.<br>
 </li>
-<li>App starts at <code>https://localhost:5000</code>.<br>
+<li>App starts at <code>https://localhost:5000</code> or whatever port is configured.<br>
 </li>
 <li>Front‑end fetches sample data without 500s.</li>
 </ol>
