@@ -361,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="move-secrets-to-.env" class="level2">
 <h2 class="anchored" data-anchor-id="move-secrets-to-.env">1&nbsp;·&nbsp;Move Secrets to <code>.env</code></h2>
-<p>We no longer store connection strings or API keys in <code>appsettings.Development.json</code>.</p>
+<p>We no longer store connection strings or API keys in <code>appsettings.json</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> .env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
@@ -390,7 +390,7 @@ Follow either the native install or Docker‑Compose option.</p>
 </li>
 <li>EF&nbsp;Core migrations apply without errors.<br>
 </li>
-<li>API starts at <code>https://localhost:5001/swagger</code>.<br>
+<li>App starts at <code>https://localhost:5000</code>.<br>
 </li>
 <li>Front‑end fetches sample data without 500s.</li>
 </ol>
