@@ -52,7 +52,7 @@ choco install pgadmin4 -y
 
 Launch Docker Desktop once to finish post‑install steps.
 
-### 2. Install pgAdmin (optional GUI)
+### 2. Install pgAdmin (GUI)
 
 | macOS | Windows |
 |-------|---------|
@@ -86,16 +86,19 @@ Ports (default):
 | Service | Host Port |
 |---------|-----------|
 | Postgres | **5433** |
-| pgAdmin  | 8080 |
 
 ---
 
 ### Connecting with pgAdmin
 
-1. Open `http://localhost:8080`
-2. Add new server:  
-   *Host *: `host.docker.internal` (mac/Win)  
-   *Port*: `5433`
+1. Open `pgAdmin` app from your Start Menu (Windows) or /Applications folder (macOS).
+2. Add new server:
+    - *Name*: `pedalogical-db`
+    - *Connection* tab:
+      - *Host*: `localhost` (mac/Win)
+      - *Username*: `pedalogical_user`
+      - *Password*: `Password` # from Notion
+      - *Port*: `5433`
 
 ---
 

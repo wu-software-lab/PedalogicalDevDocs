@@ -44,6 +44,6 @@ Run the app end‑to‑end to confirm the migration was successful.
 Checklist:
 
 1. `dotnet build` succeeds.  
-2. EF Core migrations apply without errors.  
-3. API starts at `https://localhost:5001/swagger`.  
+2. EF Core migrations apply without errors `dotnet ef database update`.  
+3. App starts at `https://localhost:5000` or whatever port is configured.  
 4. Front‑end fetches sample data without 500s.

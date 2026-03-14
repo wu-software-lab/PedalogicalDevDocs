@@ -377,18 +377,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="header">
 <th>Key</th>
 <th>Description</th>
-<th>Where to Find</th>
+<th>Where to Find / What to Use</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>POSTGRES_PASSWORD</code></td>
+<td><code>PG_PORT</code></td>
+<td>Port for local/Docker Postgres</td>
+<td><code>5432</code> (Local) or <code>5433</code> (Docker)</td>
+</tr>
+<tr class="even">
+<td><code>PG_PASS</code></td>
 <td>Password for local/Docker Postgres</td>
+<td>Notion&nbsp;→&nbsp;Secrets OR Use your own</td>
+</tr>
+<tr class="odd">
+<td><code>OPENAI_URL</code></td>
+<td>Base URL for OpenAI API</td>
 <td>Notion&nbsp;→&nbsp;Secrets</td>
 </tr>
 <tr class="even">
 <td><code>OPENAI_API_KEY</code></td>
-<td>Needed for AI&nbsp;features</td>
+<td>API Key for Dev</td>
 <td>Notion&nbsp;→&nbsp;Secrets</td>
 </tr>
 <tr class="odd">

@@ -21,10 +21,12 @@ cp .env.example .env
 
 ## 2. Fill Required Keys
 
-| Key | Description | Where to Find |
+| Key | Description | Where to Find / What to Use |
 |-----|-------------|---------------|
-| `POSTGRES_PASSWORD` | Password for local/Docker Postgres | Notion → Secrets |
-| `OPENAI_API_KEY` | Needed for AI features | Notion → Secrets |
+| `PG_PORT` | Port for local/Docker Postgres | `5432` (Local) or `5433` (Docker) |
+| `PG_PASS` | Password for local/Docker Postgres | Notion → Secrets OR Use your own |
+| `OPENAI_URL` | Base URL for OpenAI API | Notion → Secrets |
+| `OPENAI_API_KEY` | API Key for Dev | Notion → Secrets |
 | `SENDGRID_API_KEY` | For sending emails | Notion → Secrets |
 | `SONARQUBE_API_KEY` | For Code quality checks | Notion → Secrets |
 
